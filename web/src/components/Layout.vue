@@ -1,18 +1,28 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
+import { useAuth } from '../composables/useAuth'
 
 const dark = ref(true)
+const auth = useAuth()
 
-const nav = [
-  { path: '/', label: 'Home' },
-  { path: '/about', label: 'About' },
-  { path: '/skills', label: 'Skills' },
-  { path: '/projects', label: 'Projects' },
-  { path: '/blog', label: 'Blog' },
-  { path: '/contact', label: 'Contact' },
-  { path: '/status', label: 'Status' },
-]
+const nav = computed(() => {
+  const items = [
+    { path: '/', label: 'Home' },
+    { path: '/about', label: 'About' },
+    { path: '/skills', label: 'Skills' },
+    { path: '/projects', label: 'Projects' },
+    { path: '/blog', label: 'Blog' },
+    { path: '/contact', label: 'Contact' },
+    { path: '/status', label: 'Status' },
+  ]
+  if (auth.isLoggedIn()) {
+    items.push({ path: '/admin', label: 'Admin' })
+  } else {
+    items.push({ path: '/login', label: 'Login' })
+  }
+  return items
+})
 
 function toggleDark() {
   dark.value = !dark.value
@@ -24,12 +34,12 @@ function toggleDark() {
 
 onMounted(() => {
   const stored = localStorage.getItem('theme')
-  if (stored === 'light') {
-    dark.value = false
-    document.documentElement.classList.remove('dark')
-  } else {
-    dark.value = true
+  const isDark = stored !== 'light'
+  dark.value = isDark
+  if (isDark) {
     document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
   }
 })
 </script>

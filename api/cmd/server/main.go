@@ -33,6 +33,8 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/health", handlers.Health)
 	mux.HandleFunc("/status", handlers.Status(cfg.StartTime, db))
+	mux.HandleFunc("/login", handlers.Login(cfg))
+	mux.Handle("/admin", middleware.RequireAuth(cfg, handlers.Admin))
 
 	addr := ":" + strconv.Itoa(cfg.Port)
 
