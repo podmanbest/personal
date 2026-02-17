@@ -26,6 +26,7 @@ func main() {
 			log.Printf("database: koneksi gagal (jalan tanpa DB): %v", err)
 			db = nil
 		} else {
+			log.Print("database: terhubung")
 			defer db.Close()
 		}
 	}
