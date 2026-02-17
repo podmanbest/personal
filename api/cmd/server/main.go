@@ -23,9 +23,11 @@ func main() {
 		var err error
 		db, err = database.Open(cfg.DBDSN)
 		if err != nil {
-			log.Fatalf("database: %v", err)
+			log.Printf("database: koneksi gagal (jalan tanpa DB): %v", err)
+			db = nil
+		} else {
+			defer db.Close()
 		}
-		defer db.Close()
 	}
 
 	mux := http.NewServeMux()
