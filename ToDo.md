@@ -1,5 +1,7 @@
 # TODO List
+
 Struktur Folder
+
 ```
 api #backend (golang)
 ├── cmd
@@ -7,6 +9,12 @@ api #backend (golang)
 ├── internal #internal
 │   ├── handlers #handlers
 │   ├── models #models
+│   │   ├── user.go          # Struct untuk table users
+│   │   ├── project.go       # Struct untuk table projects
+│   │   ├── skill.go         # Struct untuk table skills
+│   │   ├── post.go          # Struct untuk table posts
+│   │   ├── certification.go # Struct untuk table certifications
+│   │   └── uptime.go        # Struct untuk table uptime_logs
 │   ├── database #database
 │   ├── middleware #middleware
 │   └── config #config
@@ -35,7 +43,9 @@ deploy #deploy
 ```
 
 ## Phase 1: Infrastructure & Planning (Fondasi)
+
 Ini adalah tahap "Design Document" sebelum coding.
+
 - Pilih Domain Name
   1. Usahakan namaanda.com, namaanda.net, atau namaanda.id.
   2. Hindari domain gratisan (.tk, .ml) agar terlihat profesional.
@@ -50,7 +60,9 @@ Ini adalah tahap "Design Document" sebelum coding.
   2. Setup .gitignore yang proper.
 
 ## Phase 2: Core Features (Frontend & UX)
+
 Fitur wajib agar pengunjung paham siapa Anda dalam 5 detik.
+
 - Hero Section yang Jelas
   1. Headline: Role spesifik (misal: "Linux System Administrator").
   2. Sub-headline: Value proposition (misal: "Automating Infrastructure & Ensuring Security").
@@ -69,7 +81,9 @@ Fitur wajib agar pengunjung paham siapa Anda dalam 5 detik.
   3. Gunakan format gambar modern (WebP/AVIF).
 
 ## Phase 3: Content & Portfolio (Bukti Kompetensi)
+
 Bagian ini menjual skill Anda.
+
 - Halaman Skills (Tech Stack)
   1. Kategorikan skill: OS, Network, Cloud, Automation, Monitoring.
   2. Jangan pakai progress bar (misal: "90% Linux" itu tidak relevan), cukup list atau level (Fundamental, Advanced, Expert).
@@ -87,7 +101,9 @@ Bagian ini menjual skill Anda.
   1. Logo sertifikat (RHCE, CCNA, AWS, dll) dengan link validasi jika ada.
 
 ## Phase 4: Security & Privacy (Kredibilitas Admin)
+
 Sebagai admin keamanan/jaringan, website Anda harus aman.
+
 - HTTPS/SSL Enforcement
   1. Wajib HTTPS (HSTS enabled).
 - Security Headers
@@ -104,7 +120,9 @@ Sebagai admin keamanan/jaringan, website Anda harus aman.
   1. Pastikan header HTTP tidak membocorkan versi server (misal: X-Powered-By harus di-disable).
 
 ## Phase 5: "Dogfooding" & Monitoring (Nilai Plus)
+
 Menunjukkan Anda mempraktikkan apa yang Anda preach.
+
 - Uptime Status Page
   1. Buat halaman kecil /status yang menampilkan uptime website Anda sendiri (menggunakan Uptime Kuma atau sejenisnya).
   2. Ini menunjukkan Anda peduli pada monitoring.
@@ -117,7 +135,9 @@ Menunjukkan Anda mempraktikkan apa yang Anda preach.
   1. Setup SPF, DKIM, DMARC untuk domain email Anda (menunjukkan pemahaman email security).
 
 ## Phase 6: Easter Eggs (Sentuhan Personal)
+
 Fitur opsional untuk menunjukkan kreativitas & humor teknis.
+
 - CLI Easter Egg
   1. Jika user klik kanan -> Inspect Element, berikan pesan rahasia di Console.
   2. Atau buat halaman /ssh yang mensimulasikan terminal browser (menggunakan library seperti xterm.js).
@@ -127,7 +147,8 @@ Fitur opsional untuk menunjukkan kreativitas & humor teknis.
   1. Buat halaman 404 yang unik (misal: "Error 404: Route Not Found" dengan gaya pesan error Cisco/Linux).
 
 ## Prioritas Eksekusi (Saran Saya)
+
 - Minggu 1: Setup Domain, GitHub Repo, & Pilih Theme Hugo/Astro. (Phase 1 & 2)
 - Minggu 2: Isi Konten (Skills, Projects, CV). Jangan perfeksionis, yang penting ada isinya. (Phase 3)
 - Minggu 3: Hardening Security (Headers, SSL, GPG) & Setup Analytics. (Phase 4)
-- Minggu 4: Polish, Testing Mobile, & Launch. (Phase 5 & 6) 
+- Minggu 4: Polish, Testing Mobile, & Launch. (Phase 5 & 6)
