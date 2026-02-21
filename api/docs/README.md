@@ -1,8 +1,21 @@
-# Docs
+# Dokumentasi API
 
-Additional documentation for the API project.
+Dokumentasi proyek backend API (Go).
 
-- **API**: Entry point is `cmd/server`; routes are registered in `main.go`.
-- **Database**: Schema reference in `internal/database/table.sql`; migrations in `internal/database/migrations/`.
-- **Tests**: Unit tests in `tests/`; run with `go test ./tests/...` or `make test`.
-- **Layout**: [Standard Go Project Layout](https://github.com/golang-standards/project-layout).
+| Dokumen | Isi |
+|---------|-----|
+| [SETUP.md](SETUP.md) | Quick start: menjalankan server, migrasi, tes |
+| [API.md](API.md) | Endpoint HTTP (method, path, auth, response) |
+| [CONFIG.md](CONFIG.md) | Variabel lingkungan (`.env`) |
+| [DATABASE.md](DATABASE.md) | Schema, migrasi, referensi tabel |
+| [TESTS.md](TESTS.md) | Unit test: cara menjalankan dan cakupan |
+
+## Layout singkat
+
+- **Entry point:** `cmd/server/main.go` — daftar route & middleware.
+- **Handler:** `internal/handlers/` — health, status, auth, admin, skills.
+- **Middleware:** `internal/middleware/` — CORS, security headers, JWT auth.
+- **Database:** `internal/database/` — koneksi, migrasi, schema referensi `table.sql`.
+- **Unit test:** `tests/` — black-box test untuk handlers & middleware.
+
+Referensi layout: [Standard Go Project Layout](https://github.com/golang-standards/project-layout).
