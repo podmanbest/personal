@@ -2,6 +2,12 @@
 
 Backend: **Golang** (net/http), **MariaDB/MySQL** (opsional).
 
+## Dokumen
+
+| Dokumen | Isi |
+|---------|-----|
+| [DATABASE.md](DATABASE.md) | Schema, tabel, migrasi, DSN, kode terkait, test koneksi. |
+
 ## Endpoint
 
 | Method | Path     | Auth   | Deskripsi                    |
@@ -24,4 +30,4 @@ Backend: **Golang** (net/http), **MariaDB/MySQL** (opsional).
 - **Login:** `POST /login` body `{"username":"...","password":"..."}` → `{"token":"..."}`.
 - **Admin:** header `Authorization: Bearer <token>`.
 
-Lihat juga: [SETUP-COMMANDS.md](../SETUP-COMMANDS.md), [deploy/README.md](../../deploy/README.md).
+Lihat juga: [SETUP-COMMANDS.md](../SETUP-COMMANDS.md), [DEPLOY.md](../DEPLOY.md).
