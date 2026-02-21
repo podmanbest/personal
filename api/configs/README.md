@@ -2,6 +2,22 @@
 
 File `.env` berisi variabel lingkungan untuk API. Salin dari `.env.example` dan isi nilai yang aman.
 
+## Database: DSN atau komponen terpisah
+
+**Opsi 1 — Satu string:** set `DB_DSN=user:password@tcp(host:port)/dbname?parseTime=true`
+
+**Opsi 2 — Pisah:** set `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`, `DB_NAME`. Jika `DB_DSN` kosong, DSN dibangun otomatis. Contoh:
+
+```env
+DB_USER=personal
+DB_PASSWORD=A$ep*467
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=personal
+```
+
+Password dengan karakter khusus (`$`, `*`, `@`, `#`, dll.) aman dipakai; di dalam kode di-encode untuk connection string.
+
 ## Panduan kekuatan password
 
 Gunakan untuk **ADMIN_PASSWORD** dan **password di DB_DSN** (user database):
@@ -19,6 +35,6 @@ Gunakan untuk **ADMIN_PASSWORD** dan **password di DB_DSN** (user database):
 
 ## Variabel
 
-Lihat **`.env.example`** untuk daftar variabel. Ringkasan: `PORT`, `DB_DSN`, `ADMIN_USERNAME`, `ADMIN_PASSWORD`, `JWT_SECRET`, `ALLOW_ORIGIN`.
+Lihat **`.env.example`** untuk daftar variabel. Ringkasan: `PORT`; `DB_DSN` atau (`DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`, `DB_NAME`); `ADMIN_USERNAME`, `ADMIN_PASSWORD`, `JWT_SECRET`, `ALLOW_ORIGIN`.
 
 Jangan commit `.env` yang berisi nilai asli ke Git.

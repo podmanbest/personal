@@ -5,20 +5,25 @@ import (
 	"testing"
 
 	"github.com/joho/godotenv"
+	"github.com/personal/api/internal/config"
 	"github.com/personal/api/internal/database"
 )
 
 func init() {
-	// Load api/configs/.env saat test dijalankan dari folder api/ (supaya DB_DSN dipakai TestDatabaseConnection)
+	// Load api/configs/.env saat test dijalankan dari folder api/
 	_ = godotenv.Load("configs/.env")
 }
 
 // TestDatabaseConnection memastikan koneksi ke database berhasil (ping + query sederhana).
-// Dikeluarkan jika DB_DSN tidak di-set (CI tanpa MySQL).
+// DSN dari DB_DSN atau dari DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME. Skip jika keduanya tidak di-set.
 func TestDatabaseConnection(t *testing.T) {
 	dsn := os.Getenv("DB_DSN")
 	if dsn == "" {
-		t.Skip("DB_DSN tidak di-set, skip test koneksi database")
+		cfg := config.Load(0)
+		dsn = cfg.DBDSN
+	}
+	if dsn == "" {
+		t.Skip("DB_DSN atau (DB_USER + DB_NAME) tidak di-set, skip test koneksi database")
 	}
 
 	db, err := database.Open(dsn)

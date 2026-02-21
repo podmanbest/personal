@@ -15,7 +15,9 @@ import (
 )
 
 func main() {
+	// Load .env dari folder api/ atau api/configs/
 	_ = godotenv.Load()
+	_ = godotenv.Load("configs/.env")
 	startTime := time.Now().Unix()
 	cfg := config.Load(startTime)
 
@@ -24,7 +26,8 @@ func main() {
 		var err error
 		db, err = database.Open(cfg.DBDSN)
 		if err != nil {
-			log.Printf("database: koneksi gagal (jalan tanpa DB): %v", err)
+			log.Printf("database: koneksi gagal (server jalan tanpa DB): %v", err)
+			log.Print("database: pastikan MySQL/MariaDB jalan, DB_DSN benar di configs/.env")
 			db = nil
 		} else {
 			log.Print("database: terhubung")
