@@ -9,6 +9,7 @@ const auth = useAuth()
 const message = ref('')
 const loading = ref(true)
 const error = ref('')
+const apiBase = import.meta.env.VITE_API_URL || ''
 
 function logout() {
   auth.logout()
@@ -21,8 +22,9 @@ onMounted(async () => {
     router.replace('/login')
     return
   }
+  const adminUrl = apiBase ? `${apiBase.replace(/\/$/, '')}/admin` : '/api/admin'
   try {
-    const r = await fetch('/api/admin', {
+    const r = await fetch(adminUrl, {
       headers: { Authorization: `Bearer ${token}` },
     })
     if (r.status === 401) {
