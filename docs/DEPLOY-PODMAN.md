@@ -88,6 +88,7 @@ podman exec personal-api /app/migrate
 ### 4. Akses aplikasi
 
 - **Frontend (SPA):** http://localhost:8080  
+- **Swagger (OpenAPI 3):** http://localhost:8080/api/docs  
 - API hanya diakses lewat nginx (same-origin), tidak perlu buka port 8081 ke host.
 
 ### 5. Log dan stop

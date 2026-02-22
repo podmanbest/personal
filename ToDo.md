@@ -4,7 +4,7 @@
 
 | Area | Status | Keterangan |
 |------|--------|------------|
-| **Backend API** | ✅ | Go: `/api/health`, `/api/status`, `/api/skills`, `/api/login`, `/api/admin` (JWT). CRUD admin: `/api/admin/skill-categories`, `/api/admin/skills`, tools, tags, projects, posts. Middleware CORS & security headers. Swagger: `/api/docs`. |
+| **Backend API** | ✅ | Go: `/api/health`, `/api/status`, `/api/skills`, `/api/login`, `/api/admin` (JWT). CRUD admin: `/api/admin/skill-categories`, `/api/admin/skills`, tools, tags, projects, posts. Middleware CORS & security headers. Swagger (OpenAPI 3): `/api/docs` (Swagger UI + openapi.json). |
 | **Database** | ✅ | MySQL/MariaDB opsional, migrasi (001 + 002), schema users, skills, projects, posts, dll. |
 | **Config & env** | ✅ | `api/configs/.env`, DSN dari DB_DSN atau DB_USER/DB_PASSWORD/DB_HOST/DB_PORT/DB_NAME. |
 | **Dokumentasi** | ✅ | `docs/api/` (README, DATABASE, DATABASE-SETUP), RUN-API, DEPLOY, STRUKTUR-PROYEK. |

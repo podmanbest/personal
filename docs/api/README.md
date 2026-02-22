@@ -9,7 +9,7 @@ Backend: **Go** (net/http), **MySQL/MariaDB** (opsional). Server tetap jalan tan
 | [DATABASE-SETUP.md](DATABASE-SETUP.md) | Membuat database dan user MySQL/MariaDB (CREATE DATABASE, CREATE USER, GRANT). |
 | [DATABASE.md](DATABASE.md) | Schema, tabel, migrasi, DSN, kode terkait, test koneksi. |
 
-**Spesifikasi endpoint lengkap:** [api/docs/API.md](../../api/docs/API.md). **Swagger UI (interaktif):** `GET http://<host>/api/docs` — dokumentasi OpenAPI di browser.
+**Swagger (OpenAPI 3):** sumber resmi dokumentasi API. **Swagger UI:** `GET http://<host>/api/docs` — dokumentasi interaktif di browser. Spec: `api/internal/spec/openapi.json`. Ringkasan endpoint: [api/docs/API.md](../../api/docs/API.md).
 
 ---
 
@@ -75,7 +75,7 @@ Jika `DB_DSN` kosong, DSN dibangun dari `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB
 
 ## Referensi lain
 
-- [api/docs/API.md](../../api/docs/API.md) — **spesifikasi lengkap semua endpoint**
+- [api/docs/API.md](../../api/docs/API.md) — **ringkasan endpoint** (spec resmi: Swagger UI + openapi.json)
 - [api/docs/](../../api/docs/) — SETUP, CONFIG, DATABASE, TESTS
 - [docs/RUN-API.md](../RUN-API.md) — cara menjalankan API
 - [docs/DEPLOY.md](../DEPLOY.md) — CI/CD, deploy

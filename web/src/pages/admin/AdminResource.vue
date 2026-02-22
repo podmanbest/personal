@@ -8,7 +8,10 @@ const route = useRoute()
 const auth = useAuth()
 const { adminResourceUrl, adminResourcesUrl } = useApiBase()
 
-const resourceId = computed(() => route.params.resource || '')
+const resourceId = computed(() => {
+  const seg = route.path.replace(/^\/admin\/?/, '').split('/')[0]
+  return seg || ''
+})
 const schema = ref(null)
 const list = ref([])
 const loading = ref(true)

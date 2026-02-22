@@ -1,4 +1,4 @@
-// Package spec menyajikan dokumentasi OpenAPI (Swagger) di /api/docs.
+// Package spec menyajikan Swagger (OpenAPI 3) di /api/docs.
 package spec
 
 import (
@@ -12,9 +12,8 @@ import (
 //go:embed openapi.json index.html
 var content embed.FS
 
-// Handler mengembalikan http.Handler yang menyajikan Swagger UI dan openapi.json.
-// Mount di /api/docs/ (dengan trailing slash). Request /api/docs dan /api/docs/ → index.html;
-// /api/docs/openapi.json → spec.
+// Handler mengembalikan http.Handler untuk Swagger UI dan openapi.json.
+// Mount di /api/docs/. Request /api/docs atau /api/docs/ → index.html; /api/docs/openapi.json → spec.
 func Handler() http.Handler {
 	sub, _ := fs.Sub(content, ".")
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

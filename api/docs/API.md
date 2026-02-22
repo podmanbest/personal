@@ -1,8 +1,12 @@
-# API Endpoints
+# API Endpoints (ringkasan)
 
-Base URL: `http://localhost:8081` (atau sesuai `PORT` di env). Semua response JSON; error berupa `{"error":"<pesan>"}`.
+Dokumentasi API proyek ini mengikuti **Swagger (OpenAPI 3)**. Sumber resmi: **Swagger UI** dan file spec OpenAPI.
 
-**Dokumentasi interaktif (Swagger UI):** [http://localhost:8081/api/docs](http://localhost:8081/api/docs) (atau `http://<ip-atau-host>/api/docs`).
+| Yang | Keterangan |
+|------|------------|
+| **Swagger UI** | [http://localhost:8081/api/docs](http://localhost:8081/api/docs) — dokumentasi interaktif (uji request dari browser) |
+| **Spec (OpenAPI 3.0.3)** | `api/internal/spec/openapi.json` — [Swagger/OpenAPI Specification](https://swagger.io/specification/) |
+| **Base URL** | `http://localhost:8081` (atau `PORT` di env). Response JSON; error: `{"error":"<pesan>"}` |
 
 ---
 
@@ -255,3 +259,9 @@ Nilai `*` tidak dipakai (aman production). Request **OPTIONS** dijawab `204 No C
 ## Security headers
 
 Middleware menambah header ke semua response: `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy`, `Strict-Transport-Security` (bila HTTPS), `Content-Security-Policy`, serta menghapus `X-Powered-By` dan mengosongkan `Server`. Detail: `internal/middleware/`.
+
+---
+
+## Dokumentasi resmi (Swagger)
+
+Spesifikasi API mengikuti [Swagger / OpenAPI 3](https://swagger.io/specification/). Sumber resmi: **Swagger UI** (`GET /api/docs`) dan file **`api/internal/spec/openapi.json`**. Untuk request/response lengkap dan uji coba endpoint, gunakan Swagger UI.

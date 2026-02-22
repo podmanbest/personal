@@ -38,7 +38,7 @@ Semua endpoint memakai prefix **`/api/`** (public) atau **`/api/admin/`** (prote
 | GET | `/api/skills` | — | Daftar skills (dari DB) |
 | GET | `/api/admin` | Bearer JWT | Area admin (overview, resources, CRUD) |
 
-Detail request/response, CRUD admin, dan konfigurasi: **[docs/api/README.md](../docs/api/README.md)**. Spesifikasi OpenAPI & Swagger UI: **GET /api/docs**.
+Detail request/response, CRUD admin, dan konfigurasi: **[docs/api/README.md](../docs/api/README.md)**. **Swagger (OpenAPI 3):** **GET /api/docs** (Swagger UI), spec: `internal/spec/openapi.json`.
 
 ## Konfigurasi
 

@@ -80,28 +80,57 @@ onMounted(async () => {
 
 <template>
   <div class="space-y-8">
-    <h2 class="text-xl font-semibold text-neutral-900 dark:text-white">Overview</h2>
-    <p v-if="error" class="text-red-600 dark:text-red-400 text-sm">{{ error }}</p>
-    <div v-else-if="loading" class="text-neutral-500 dark:text-neutral-400">Memuat…</div>
+    <!-- Welcome / Page title -->
+    <div>
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white tracking-tight">Overview</h2>
+      <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+        Ringkasan konten dan akses cepat ke resource CMS.
+      </p>
+    </div>
+
+    <p v-if="error" class="text-sm text-red-600 dark:text-red-400">{{ error }}</p>
+    <div v-else-if="loading" class="flex items-center gap-2 text-neutral-500 dark:text-neutral-400">
+      <span class="inline-block w-5 h-5 border-2 border-neutral-300 dark:border-neutral-600 border-t-neutral-900 dark:border-t-white rounded-full animate-spin" />
+      Memuat…
+    </div>
+
     <template v-else>
-      <div class="p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 space-y-4">
+      <!-- Welcome card -->
+      <div class="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 p-6 shadow-sm">
         <p class="text-neutral-700 dark:text-neutral-300">{{ message }}</p>
-        <p class="text-sm text-neutral-500 dark:text-neutral-400">
-          Kelola konten secara dinamis berdasarkan model database (CMS/LMS). Pilih resource di bawah atau dari menu samping.
+        <p class="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
+          Kelola konten secara dinamis berdasarkan model database (CMS). Pilih resource di bawah atau dari menu samping.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <RouterLink
-          v-for="res in resources"
-          :key="res.id"
-          :to="`/admin/${res.id}`"
-          class="block p-5 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 hover:border-neutral-300 dark:hover:border-neutral-600 transition-colors"
-        >
-          <h3 class="font-semibold text-neutral-900 dark:text-white">{{ res.label }}</h3>
-          <p class="text-2xl font-bold text-neutral-700 dark:text-neutral-200 mt-1">{{ counts[res.id] ?? '—' }}</p>
-          <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">Tambah / edit / hapus</p>
-        </RouterLink>
+      <!-- Stats / resource cards (dashboard style) -->
+      <div>
+        <h3 class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 uppercase tracking-wider mb-4">
+          Resource
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <RouterLink
+            v-for="res in resources"
+            :key="res.id"
+            :to="`/admin/${res.id}`"
+            class="group block rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 p-5 shadow-sm hover:shadow-md hover:border-neutral-300 dark:hover:border-neutral-600 transition-all duration-200"
+          >
+            <div class="flex items-start justify-between">
+              <div>
+                <h4 class="font-semibold text-neutral-900 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-neutral-200">
+                  {{ res.label }}
+                </h4>
+                <p class="mt-1 text-2xl font-bold text-neutral-800 dark:text-neutral-200 tabular-nums">
+                  {{ counts[res.id] ?? '—' }}
+                </p>
+                <p class="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
+                  Tambah / edit / hapus
+                </p>
+              </div>
+              <span class="text-neutral-300 dark:text-neutral-600 group-hover:text-neutral-500 dark:group-hover:text-neutral-400 transition-colors">→</span>
+            </div>
+          </RouterLink>
+        </div>
       </div>
     </template>
   </div>

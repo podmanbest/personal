@@ -1,4 +1,10 @@
 // Package main runs the API HTTP server.
+//
+// @title Personal / Portfolio API
+// @version 1.0
+// @description Backend API: health, status, login (JWT), public (skills, projects, posts), admin CRUD (CMS).
+// @BasePath /api
+// @host localhost:8081
 package main
 
 import (
@@ -47,7 +53,7 @@ func main() {
 	mux.HandleFunc("/api/projects/", handlers.ProjectBySlug(db))
 	mux.HandleFunc("/api/posts", handlers.PostsList(db))
 	mux.HandleFunc("/api/posts/", handlers.PostBySlug(db))
-	// Swagger UI: http://host/api/docs atau http://host/api/docs/
+	// Swagger (OpenAPI 3): Swagger UI + openapi.json di /api/docs
 	mux.HandleFunc("/api/docs", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != "/api/docs" {
 			return

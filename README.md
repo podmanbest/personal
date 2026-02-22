@@ -41,7 +41,7 @@ go run ./cmd/server
 # atau: make run
 ```
 
-Cek: [http://localhost:8081/api/health](http://localhost:8081/api/health), [http://localhost:8081/api/status](http://localhost:8081/api/status). Dokumentasi interaktif: [http://localhost:8081/api/docs](http://localhost:8081/api/docs).
+Cek: [http://localhost:8081/api/health](http://localhost:8081/api/health), [http://localhost:8081/api/status](http://localhost:8081/api/status). **Swagger (OpenAPI 3):** [http://localhost:8081/api/docs](http://localhost:8081/api/docs).
 
 ### 2. Frontend (Web)
 
@@ -52,6 +52,8 @@ npm run dev
 ```
 
 Frontend di [http://localhost:5173](http://localhost:5173). Vite mem-proxy `/api` ke backend (port 8081; semua endpoint di bawah `/api/` dan `/api/admin/`).
+
+**Integrasi API – Web:** Semua panggilan API memakai composable `useApiBase()` dan helper `apiFetch()` di `web/src/composables/useApi.js`. URL backend: dev pakai proxy (tanpa env); production set `VITE_API_URL` di `web/.env` (lihat `web/.env.example`). Opsional: `VITE_API_PORT` untuk port backend saat dev.
 
 ---
 
@@ -117,7 +119,7 @@ Semua endpoint memakai prefix **`/api/`** (public) atau **`/api/admin/`** (prote
 | GET | `/api/admin/resources` | Bearer JWT | Schema CMS (list/form) |
 | GET/POST/PUT/DELETE | `/api/admin/skill-categories`, `skills`, `tools`, `tags`, `projects`, `posts` | Bearer JWT | CRUD resource admin |
 
-Token JWT berlaku 7 hari. Spesifikasi lengkap & Swagger: **api/docs/API.md**, `GET /api/docs`. Konfigurasi env: **api/configs/.env.example**, **docs/api/README.md**.
+Token JWT berlaku 7 hari. **Swagger (OpenAPI 3):** `GET /api/docs` (Swagger UI), spec: **api/internal/spec/openapi.json**. Ringkasan: **api/docs/API.md**. Konfigurasi env: **api/configs/.env.example**, **docs/api/README.md**.
 
 ---
 

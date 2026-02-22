@@ -72,7 +72,7 @@ Cek:
 
 - Health: **http://localhost:8081/api/health**
 - Status: **http://localhost:8081/api/status**
-- Swagger: **http://localhost:8081/api/docs**
+- Swagger (OpenAPI 3): **http://localhost:8081/api/docs**
 
 ---
 
@@ -105,4 +105,4 @@ Pastikan **`configs/.env`** (atau variabel env) tersedia di lingkungan jalannya.
 
 ---
 
-Dokumentasi lengkap API: [api/docs/](../api/docs/README.md).
+Swagger (OpenAPI 3): `GET /api/docs`. Ringkasan & doc API: [api/docs/](../api/docs/README.md).

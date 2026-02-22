@@ -88,7 +88,8 @@ Dokumen ini memetakan lokasi file di repository berdasarkan **fungsi** (apa pera
 ### Dokumentasi API
 | Lokasi | Fungsi |
 |--------|--------|
-| `api/docs/README.md` | Penjelasan singkat entry point, DB, layout |
+| `api/docs/README.md` | Penjelasan singkat entry point, DB, layout, Swagger |
+| `api/internal/spec/openapi.json` | Spec Swagger (OpenAPI 3); dilayani di /api/docs |
 
 ---
 

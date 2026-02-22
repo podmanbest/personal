@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useAuth } from '../composables/useAuth'
-import { useApiBase } from '../composables/useApi'
+import { useApiBase, apiFetch } from '../composables/useApi'
 
 const router = useRouter()
 const route = useRoute()
@@ -24,19 +24,10 @@ async function onSubmit(e) {
   }
   loading.value = true
   try {
-    const r = await fetch(loginUrl(), {
+    const data = await apiFetch(loginUrl(), {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: username.value.trim(), password: password.value }),
+      body: { username: username.value.trim(), password: password.value },
     })
-    let data = {}
-    try {
-      data = await r.json()
-    } catch (_) {}
-    if (!r.ok) {
-      error.value = r.status === 401 ? 'Username atau password salah.' : (data.error || data.message || 'Login gagal.')
-      return
-    }
     if (data.token) {
       auth.setToken(data.token)
       const redirect = route.query.redirect || '/admin'
@@ -45,7 +36,7 @@ async function onSubmit(e) {
       error.value = 'Respons tidak valid.'
     }
   } catch (err) {
-    error.value = 'Koneksi gagal. Periksa API dan proxy.'
+    error.value = err.status === 401 ? 'Username atau password salah.' : (err.message || 'Koneksi gagal. Periksa API dan proxy.')
   } finally {
     loading.value = false
   }

@@ -6,7 +6,7 @@ Dokumentasi proyek backend API (Go).
 |---------|-----|
 | [SETUP.md](SETUP.md) | Quick start: menjalankan server, migrasi, tes |
 | [API.md](API.md) | Endpoint HTTP (method, path, auth, response) |
-| **Swagger UI** | `GET /api/docs` — dokumentasi interaktif OpenAPI (browser) |
+| **Swagger UI** | `GET /api/docs` — dokumentasi Swagger (OpenAPI 3); spec: `internal/spec/openapi.json` |
 | [CONFIG.md](CONFIG.md) | Variabel lingkungan (`.env`) |
 | [DATABASE.md](DATABASE.md) | Schema, migrasi, referensi tabel |
 | [TESTS.md](TESTS.md) | Unit test: cara menjalankan dan cakupan |
