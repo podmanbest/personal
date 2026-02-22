@@ -10,8 +10,9 @@ import (
 )
 
 func init() {
-	// Format sama dengan server & migrate: api/configs/.env (DB_DSN atau DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
+	// Format sama dengan server & migrate. Coba dari cwd (api/) dan dari repo root.
 	_ = godotenv.Load("configs/.env")
+	_ = godotenv.Load("api/configs/.env")
 }
 
 // TestDatabaseConnection memastikan koneksi ke database berhasil (ping + SELECT 1).

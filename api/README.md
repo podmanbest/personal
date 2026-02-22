@@ -45,11 +45,13 @@ Penjelasan lengkap: **[docs/api/README.md](../docs/api/README.md#konfigurasi-env
 
 ## Perintah
 
+Semua perintah di bawah dijalankan dari **folder `api/`** (bukan dari `web/` atau root repo):
+
 | Perintah | Deskripsi |
 |----------|-----------|
 | `make run` | Jalankan server |
 | `make build` | Build `bin/server` dan `bin/migrate` |
-| `make test` | Unit test (`tests/`) |
+| `make test` | Unit test (`tests/`) — **jalankan dari folder api/** |
 | `make migrate` | Migrasi DB (up) |
 | `make migrate-down` | Rollback migrasi |
 
