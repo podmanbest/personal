@@ -12,6 +12,7 @@ const (
 	headerStrictTransport     = "Strict-Transport-Security"
 	headerContentSecurity     = "Content-Security-Policy"
 	headerXPoweredBy          = "X-Powered-By"
+	headerServer              = "Server"
 	headerForwardedProto      = "X-Forwarded-Proto"
 
 	valueNosniff              = "nosniff"
@@ -39,6 +40,7 @@ func SecurityHeaders(next http.Handler) http.Handler {
 		}
 		w.Header().Set(headerContentSecurity, valueCSP)
 		w.Header().Del(headerXPoweredBy)
+		w.Header().Set(headerServer, "") // Phase 4: hide server identity
 		next.ServeHTTP(w, r)
 	})
 }

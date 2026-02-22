@@ -12,7 +12,7 @@
 | **Tests** | ✅ | `api/tests/`: health, auth, status, admin, skills, middleware, database. |
 | **Frontend (Web)** | ✅ | Vue 3 + Vite: Hero, Nav, dark mode, responsive, Skills/Projects/Blog dari API, Login/Status. **Admin dashboard**: Overview, CRUD Kategori & Skills. CV download (letakkan cv.pdf di web/public). Certifications di About. |
 | **Domain & hosting** | 🔲 | Pilih domain, pastikan GitHub Pages / custom domain jika perlu. |
-| **Security hardening** | 🔲 | CSP lengkap, HSTS, kontak aman (mailto/form statis), analytics privacy-friendly (Phase 4). |
+| **Security hardening** | 🟡 | Lihat [docs/PHASE4-SECURITY.md](docs/PHASE4-SECURITY.md). CSP (API + meta SPA), HSTS, X-Frame-Options, hide Server ✅. Kontak mailto ✅; isi email + PGP. Analytics & form statis opsional. |
 | **Easter eggs & polish** | 🔲 | 404 ✅ (custom), robots.txt ✅, sitemap.xml ✅ (ganti yoursite.com sebelum deploy). CLI easter egg opsional. |
 
 **Langkah berikut (saran):** Isi data projects & posts di DB (atau pakai fallback statis), letakkan cv.pdf di web/public, ganti domain di sitemap.xml, lalu security headers lanjutan (CSP, analytics).
@@ -152,10 +152,10 @@ Fitur opsional untuk menunjukkan kreativitas & humor teknis.
 | 3 | Certifications badge (section di About) | ✅ |
 | 4 | HTTPS/SSL (Pages default) | ✅ |
 | 4 | Security headers (X-Content-Type-Options, dll.) | ✅ |
-| 4 | CSP, X-Frame-Options lengkap | 🔲 |
-| 4 | Kontak aman (mailto / form statis) | 🔲 |
-| 4 | Privacy-friendly analytics | 🔲 |
-| 4 | Hide server info | 🔲 |
+| 4 | CSP, X-Frame-Options lengkap | ✅ (API + CSP meta di web/index.html) |
+| 4 | Kontak aman (mailto / form statis) | ✅ (mailto di Contact.vue; isi email & PGP) |
+| 4 | Privacy-friendly analytics | 🔲 (opsional: Plausible/Umami di index.html) |
+| 4 | Hide server info | ✅ (X-Powered-By del, Server kosong di middleware) |
 | 5 | Uptime/status (GET /status) | ✅ |
 | 5 | CI/CD (GitHub Actions) | ✅ |
 | 5 | Backup strategy (remote repo) | 🔲 |
