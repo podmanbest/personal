@@ -1,9 +1,11 @@
 # Binaries
 bin/
 vendor/
-# Environment (secrets)
+# Environment (secrets) — jangan commit
 .env
 .env.local
+configs/.env
+configs/.env.local
 
 # IDE / OS
 .idea/

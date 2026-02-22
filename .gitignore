@@ -1,3 +1,7 @@
+# Environment (jangan commit rahasia)
+.env
+.env.local
+
 # Mac OS X files
 .DS_Store
 
