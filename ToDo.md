@@ -10,7 +10,7 @@
 | **Dokumentasi** | ✅ | `docs/api/` (README, DATABASE, DATABASE-SETUP), RUN-API, DEPLOY, STRUKTUR-PROYEK. |
 | **CI/CD** | ✅ | GitHub Actions: build + test API & Web, deploy ke GitHub Pages, auto-merge PR. |
 | **Tests** | ✅ | `api/tests/`: health, auth, status, admin, skills, middleware, database. |
-| **Frontend (Web)** | 🔲 | Vue 3 + Vite di `web/` — konten, hero, navigasi, halaman Skills/Projects/Blog sesuai fase di bawah. |
+| **Frontend (Web)** | ✅ | Vue 3 + Vite: Hero, Nav (Home, About, Skills, Projects, Blog, Contact, Status), dark mode, responsive, **Skills dari API** (fallback statis), Login/Admin/Status pakai API. |
 | **Domain & hosting** | 🔲 | Pilih domain, pastikan GitHub Pages / custom domain jika perlu. |
 | **Security hardening** | 🔲 | CSP, HSTS, kontak aman (mailto/form statis), analytics privacy-friendly (Phase 4). |
 | **Easter eggs & polish** | 🔲 | 404 custom, robots.txt, sitemap, CLI easter egg (Phase 6). |
@@ -140,10 +140,10 @@ Fitur opsional untuk menunjukkan kreativitas & humor teknis.
 | 1 | Tech stack (Go + Vue dipakai) | ✅ |
 | 1 | Hosting (GitHub Pages) | ✅ |
 | 1 | Version control, .gitignore | ✅ |
-| 2 | Hero section, navigasi, responsive | 🔲 |
-| 2 | Dark mode toggle | 🔲 |
+| 2 | Hero section, navigasi, responsive | ✅ |
+| 2 | Dark mode toggle | ✅ |
 | 2 | Fast loading (Lighthouse > 90) | 🔲 |
-| 3 | Halaman Skills (data dari API) | 🔲 |
+| 3 | Halaman Skills (data dari API) | ✅ |
 | 3 | Halaman Projects (min 3 case study) | 🔲 |
 | 3 | Blog / write-ups, syntax highlighting | 🔲 |
 | 3 | Downloadable CV (PDF) | 🔲 |

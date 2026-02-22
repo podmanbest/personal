@@ -39,6 +39,17 @@ func AllowMethod(w http.ResponseWriter, r *http.Request, method string) bool {
 	return true
 }
 
+// AllowMethods returns false and writes 405 if r.Method is not in the allowed list.
+func AllowMethods(w http.ResponseWriter, r *http.Request, methods ...string) bool {
+	for _, m := range methods {
+		if r.Method == m {
+			return true
+		}
+	}
+	http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
+	return false
+}
+
 // DecodeJSON decodes request body into v. Caller should close r.Body if needed.
 func DecodeJSON(r *http.Request, v interface{}) error {
 	return json.NewDecoder(r.Body).Decode(v)

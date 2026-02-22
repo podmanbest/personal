@@ -72,6 +72,24 @@ Semua response JSON memakai header `Content-Type: application/json`. Method sela
 
 ---
 
+### Admin CRUD (semua butuh header `Authorization: Bearer <token>`)
+
+**GET/POST/PUT/DELETE /admin/skill-categories** — Kelola tabel `skill_categories`.
+
+- **GET** — list: `{"categories":[{"id", "name", "slug", "sort_order"}, ...]}`
+- **POST** — create: body `{"name","slug","sort_order"}` → 201 `{"id", "name", "slug", "sort_order"}`
+- **PUT** — update: body `{"id", "name", "slug", "sort_order"}` → 200
+- **DELETE** — query `?id=<id>` → 200 `{"deleted": id}`
+
+**GET/POST/PUT/DELETE /admin/skills** — Kelola tabel `skills`.
+
+- **GET** — list: `{"skills":[{"id", "category_id", "name", "level", "icon_url", "category"}, ...]}`
+- **POST** — create: body `{"category_id", "name", "level", "icon_url"}` → 201
+- **PUT** — update: body `{"id", "category_id", "name", "level", "icon_url"}` → 200
+- **DELETE** — query `?id=<id>` → 200 `{"deleted": id}`
+
+---
+
 ## Konfigurasi (env)
 
 Server dan migrate membaca env dari **`api/configs/.env`** (dan `.env` di working directory). Variabel:

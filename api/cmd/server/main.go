@@ -40,6 +40,9 @@ func main() {
 	mux.HandleFunc("/status", handlers.Status(cfg.StartTime, db))
 	mux.HandleFunc("/api/skills", handlers.SkillsList(db))
 	mux.HandleFunc("/login", handlers.Login(cfg))
+	// Admin dashboard API (CRUD) — lebih spesifik dulu
+	mux.Handle("/admin/skill-categories", middleware.RequireAuth(cfg, handlers.AdminSkillCategories(db)))
+	mux.Handle("/admin/skills", middleware.RequireAuth(cfg, handlers.AdminSkills(db)))
 	mux.Handle("/admin", middleware.RequireAuth(cfg, handlers.Admin))
 
 	addr := ":" + strconv.Itoa(cfg.Port)

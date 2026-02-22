@@ -2,16 +2,17 @@
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useAuth } from '../composables/useAuth'
+import { useApiBase } from '../composables/useApi'
 
 const router = useRouter()
 const route = useRoute()
 const auth = useAuth()
+const { loginUrl } = useApiBase()
 
 const username = ref('')
 const password = ref('')
 const error = ref('')
 const loading = ref(false)
-const apiBase = import.meta.env.VITE_API_URL || ''
 
 async function onSubmit(e) {
   e.preventDefault()
@@ -21,9 +22,8 @@ async function onSubmit(e) {
     return
   }
   loading.value = true
-  const loginUrl = apiBase ? `${apiBase.replace(/\/$/, '')}/login` : '/api/login'
   try {
-    const r = await fetch(loginUrl, {
+    const r = await fetch(loginUrl(), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: username.value.trim(), password: password.value }),
