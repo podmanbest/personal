@@ -13,6 +13,7 @@ Backend API memakai **MySQL/MariaDB**. Koneksi bersifat **opsional**: jika `DB_D
 | Variabel | Deskripsi |
 |----------|------------|
 | `DB_DSN` | Connection string MySQL/MariaDB. Kosong = API berjalan tanpa database. |
+| `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`, `DB_NAME` | Jika `DB_DSN` kosong, DSN dibangun dari komponen ini (lihat `api/internal/config/config.go`). `DB_HOST` default `localhost`, `DB_PORT` default `3306`. |
 
 ### Format DSN
 
@@ -246,6 +247,8 @@ Hanya file `*.up.sql` yang versinya belum ada di `schema_migrations` yang dijala
 
 ### Rollback (satu versi)
 
+Dari folder **`api/`**:
+
 ```bash
 go run ./cmd/migrate --down
 ```
@@ -256,7 +259,7 @@ atau:
 make migrate-down
 ```
 
-Ini menjalankan `*.down.sql` untuk versi terakhir yang tercatat.
+Ini menjalankan `*.down.sql` untuk versi terakhir yang tercatat di `schema_migrations`. Migrate membutuhkan DSN (DB_DSN atau DB_USER + DB_NAME) di `api/configs/.env`.
 
 ### Logika migrasi
 

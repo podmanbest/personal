@@ -108,7 +108,9 @@ Jika berhasil, Anda akan masuk ke database `personal` (tabel masih kosong sampai
 
 ## 7. Set DSN di aplikasi
 
-Di **`api/configs/.env`** (atau env yang dipakai server), set **DB_DSN** sesuai user dan database:
+Di **`api/configs/.env`** (atau env yang dipakai server/migrate), set koneksi database. Dua cara:
+
+**Opsi A — Satu variabel (DB_DSN):**
 
 ```env
 # Format: user:password@tcp(host:port)/database?parseTime=true
@@ -117,10 +119,22 @@ DB_DSN=api_user:password_kuat@tcp(localhost:3306)/personal?parseTime=true
 
 - **user** — `api_user`
 - **password** — password yang dipakai di `IDENTIFIED BY`
-- **host** — `localhost` (atau IP/hostname server MySQL)
+- **host** — `localhost` (atau IP/hostname server MySQL; untuk koneksi remote coba `127.0.0.1` jika localhost gagal)
 - **port** — `3306` (default MySQL/MariaDB)
 - **database** — `personal`
-- **parseTime=true** — wajib agar kolom DATE/TIMESTAMP terbaca sebagai `time.Time` di Go.
+- **parseTime=true** — ditambahkan otomatis oleh config jika pakai Opsi B; untuk Opsi A bisa ditulis eksplisit.
+
+**Opsi B — Komponen terpisah (tanpa DB_DSN):**
+
+```env
+DB_USER=api_user
+DB_PASSWORD=password_kuat
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=personal
+```
+
+DSN akan dibangun di kode dari komponen di atas (password dengan karakter khusus aman). Jika `DB_HOST` atau `DB_PORT` kosong, dipakai default `localhost` dan `3306`.
 
 ---
 
@@ -162,10 +176,20 @@ GRANT ALL PRIVILEGES ON personal.* TO 'api_user'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
-Lalu di `.env`:
+Lalu di **`api/configs/.env`** (salah satu):
 
 ```env
 DB_DSN=api_user:password_kuat@tcp(localhost:3306)/personal?parseTime=true
+```
+
+atau pakai komponen:
+
+```env
+DB_USER=api_user
+DB_PASSWORD=password_kuat
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=personal
 ```
 
 Lalu jalankan migrasi dari folder `api/`:
@@ -183,4 +207,4 @@ go run ./cmd/migrate
 - Untuk production, batasi host user (mis. `'api_user'@'app-server-ip'` atau subnet tertentu).
 - Jangan commit file **`.env`** yang berisi **DB_DSN** ke Git; gunakan **`.gitignore`** dan **`.env.example`** tanpa nilai rahasia.
 
-Lihat juga: [DATABASE.md](DATABASE.md) (schema, migrasi, test koneksi).
+Lihat juga: [DATABASE.md](DATABASE.md) (schema, migrasi, test koneksi), [README.md](README.md) (endpoint API).
