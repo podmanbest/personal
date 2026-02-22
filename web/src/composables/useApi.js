@@ -25,7 +25,7 @@ export function useApiBase() {
     postsUrl: () => apiPath('/api/posts'),
     postBySlugUrl: (slug) => apiPathSlug('/api/posts', slug),
     loginUrl: () => apiPath('/login'),
-    statusUrl: () => apiPath('/status'),
+    statusUrl: () => apiPath('/api/status'),
     adminUrl: () => apiPath('/admin'),
     adminCategoriesUrl: () => apiPath('/admin/skill-categories'),
     adminSkillsUrl: () => apiPath('/admin/skills'),

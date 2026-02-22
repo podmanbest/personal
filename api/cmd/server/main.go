@@ -39,6 +39,7 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/health", handlers.Health)
 	mux.HandleFunc("/status", handlers.Status(cfg.StartTime, db))
+	mux.HandleFunc("/api/status", handlers.Status(cfg.StartTime, db)) // untuk frontend (hindari konflik route SPA /status)
 	mux.HandleFunc("/api/skills", handlers.SkillsList(db))
 	mux.HandleFunc("/api/projects", handlers.ProjectsList(db))
 	mux.HandleFunc("/api/projects/", handlers.ProjectBySlug(db))

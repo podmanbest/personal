@@ -6,12 +6,10 @@ export default defineConfig({
   plugins: [vue()],
   server: {
     proxy: {
+      // Hanya path API di-proxy; /status tidak di-proxy agar route SPA /status (halaman Status) tidak tertimpa saat refresh
       '/api': { target: 'http://localhost:8080', changeOrigin: true },
       '/login': { target: 'http://localhost:8080', changeOrigin: true },
-      '/status': { target: 'http://localhost:8080', changeOrigin: true },
       '/admin': { target: 'http://localhost:8080', changeOrigin: true },
-      '/admin/skill-categories': { target: 'http://localhost:8080', changeOrigin: true },
-      '/admin/skills': { target: 'http://localhost:8080', changeOrigin: true },
     },
   },
 })
