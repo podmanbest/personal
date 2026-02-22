@@ -1,7 +1,7 @@
 package tests
 
 import (
-	"os"
+	"strings"
 	"testing"
 
 	"github.com/joho/godotenv"
@@ -10,25 +10,25 @@ import (
 )
 
 func init() {
-	// Load api/configs/.env saat test dijalankan dari folder api/
+	// Format sama dengan server & migrate: api/configs/.env (DB_DSN atau DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
 	_ = godotenv.Load("configs/.env")
 }
 
-// TestDatabaseConnection memastikan koneksi ke database berhasil (ping + query sederhana).
-// DSN dari DB_DSN atau dari DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME. Skip jika keduanya tidak di-set.
+// TestDatabaseConnection memastikan koneksi ke database berhasil (ping + SELECT 1).
+// DSN dari config (DB_DSN atau komponen DB_* sesuai .env.example). Skip jika tidak dikonfigurasi.
 func TestDatabaseConnection(t *testing.T) {
-	dsn := os.Getenv("DB_DSN")
+	cfg := config.Load(0)
+	dsn := strings.TrimSpace(cfg.DBDSN)
 	if dsn == "" {
-		cfg := config.Load(0)
-		dsn = cfg.DBDSN
-	}
-	if dsn == "" {
-		t.Skip("DB_DSN atau (DB_USER + DB_NAME) tidak di-set, skip test koneksi database")
+		t.Skip("DB_DSN atau (DB_USER + DB_NAME) tidak di-set di configs/.env, skip test koneksi database")
 	}
 
 	db, err := database.Open(dsn)
 	if err != nil {
 		t.Fatalf("database.Open: %v", err)
+	}
+	if db == nil {
+		t.Fatal("database.Open: db nil padahal DSN non-empty")
 	}
 	defer db.Close()
 

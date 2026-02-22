@@ -1,6 +1,13 @@
 # Konfigurasi (configs)
 
-File `.env` berisi variabel lingkungan untuk API. Salin dari `.env.example` dan isi nilai yang aman.
+File **`configs/.env`** dipakai oleh **server**, **migrate**, dan **test**. Format mengikuti **`.env.example`**. Salin: `cp .env.example .env` lalu isi nilai.
+
+## Format .env (sama untuk server, migrate, test)
+
+- **Lokasi:** `api/configs/.env`
+- **Server:** `go run ./cmd/server` — load `configs/.env`, koneksi DB dari `config.Load()`
+- **Migrasi:** `go run ./cmd/migrate` — load `configs/.env`, DSN dari `config.Load()`
+- **Test:** `go test ./tests/...` — init load `configs/.env`, DSN dari `config.Load()` (TestDatabaseConnection skip jika DSN kosong)
 
 ## Database: DSN atau komponen terpisah
 
@@ -16,7 +23,12 @@ DB_PORT=3306
 DB_NAME=personal
 ```
 
-Password dengan karakter khusus (`$`, `*`, `@`, `#`, dll.) aman dipakai; di dalam kode di-encode untuk connection string.
+Password dengan karakter khusus (`$`, `*`, `@`, `#`, dll.) aman: DSN dibangun pakai `mysql.Config.FormatDSN()` sehingga driver yang mengurus encoding.
+
+**Jika koneksi tetap gagal (mis. Laragon):**
+- Coba **DB_HOST=127.0.0.1** instead of `localhost` (atau sebaliknya).
+- Di MySQL pastikan user punya hak untuk host yang dipakai: `'user'@'localhost'` dan/atau `'user'@'127.0.0.1'`.
+- Nilai di `.env` bisa pakai kutip jika ada spasi: `DB_PASSWORD="pass word"` — kutip akan di-trim saat dibaca.
 
 ## Panduan kekuatan password
 
