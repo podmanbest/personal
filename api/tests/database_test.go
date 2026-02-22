@@ -10,9 +10,17 @@ import (
 )
 
 func init() {
-	// Format sama dengan server & migrate. Coba dari cwd (api/) dan dari repo root.
-	_ = godotenv.Load("configs/.env")
-	_ = godotenv.Load("api/configs/.env")
+	// Format sama dengan server & migrate. Cwd saat go test = package dir (api/tests), jadi .env di api/configs/.
+	paths := []string{
+		"../configs/.env",   // cwd = api/tests (biasa: go test dari api/)
+		"configs/.env",      // cwd = api (jika test dijalankan lain)
+		"api/configs/.env",  // cwd = repo root
+	}
+	for _, p := range paths {
+		if err := godotenv.Load(p); err == nil {
+			break
+		}
+	}
 }
 
 // TestDatabaseConnection memastikan koneksi ke database berhasil (ping + SELECT 1).
