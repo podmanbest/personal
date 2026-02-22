@@ -25,7 +25,7 @@ Wajib diatur di layanan tempat API berjalan (dashboard PaaS atau env di VPS):
 | `ADMIN_USERNAME` | Ya (untuk login) | Username admin. |
 | `ADMIN_PASSWORD` | Ya | Password admin. |
 | `JWT_SECRET` | Ya | Minimal 32 karakter untuk tanda-tangan JWT. |
-| `ALLOW_ORIGIN` | Jika frontend beda origin | URL asal frontend untuk CORS (mis. `https://username.github.io`). |
+| `ALLOW_ORIGIN` | Jika frontend beda origin | URL asal frontend untuk CORS (mis. `https://namaanda.com` atau `https://username.github.io`). **Jangan gunakan `*` di production** — backend menolak `*` dan tidak mengirim header CORS. |
 
 Tanpa env ini, API bisa jalan tetapi login/admin dan koneksi DB tidak berfungsi. Setelah deploy backend, set **`VITE_API_URL`** di build frontend ke URL API (mis. `https://api-anda.railway.app`) agar SPA memanggil API yang benar.
 

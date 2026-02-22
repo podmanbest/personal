@@ -10,9 +10,9 @@
 | **Dokumentasi** | ✅ | `docs/api/` (README, DATABASE, DATABASE-SETUP), RUN-API, DEPLOY, STRUKTUR-PROYEK. |
 | **CI/CD** | ✅ | GitHub Actions: build + test API & Web, deploy ke GitHub Pages, auto-merge PR. |
 | **Tests** | ✅ | `api/tests/`: health, auth, status, admin, skills, middleware, database. |
-| **Frontend (Web)** | ✅ | Vue 3 + Vite: Hero, Nav, dark mode, responsive, Skills/Projects/Blog dari API, Login/Status. **Admin dashboard**: Overview, CRUD Kategori & Skills. CV download (letakkan cv.pdf di web/public). Certifications di About. |
+| **Frontend (Web)** | ✅ | Vue 3 + Vite: Hero, Nav, dark mode, responsive, Skills/Projects/Blog dari API, Login/Status. **Graceful degradation:** jika API down, fallback data statis (hardcoded) + pesan “data contoh”; try/catch di fetch. **Admin dashboard**: Overview, CRUD Kategori & Skills. CV download (letakkan cv.pdf di web/public). Certifications di About. |
 | **Domain & hosting** | 🔲 | **Frontend:** GitHub Pages (atau Netlify/Cloudflare Pages). **Backend:** API Go tidak bisa di GitHub Pages — deploy ke PaaS (Railway, Render, Fly.io) atau VPS; set env (DB_DSN, JWT_SECRET, dll.) di hosting backend. Pilih domain jika perlu. |
-| **Security hardening** | 🟡 | Lihat [docs/PHASE4-SECURITY.md](docs/PHASE4-SECURITY.md). **Backend:** middleware Go set semua header (CSP, HSTS, X-Frame-Options, hide Server) pada response API. **Frontend (GitHub Pages):** tidak ada kontrol server-side — hanya CSP lewat `<meta>` di `index.html`; untuk HSTS/header tambahan pada SPA bisa pakai Cloudflare di depan jika custom domain. Kontak mailto ✅; isi email + PGP. Analytics & form statis opsional. |
+| **Security hardening** | 🟡 | Lihat [docs/PHASE4-SECURITY.md](docs/PHASE4-SECURITY.md). **Backend:** middleware Go set semua header (CSP, HSTS, X-Frame-Options, hide Server) pada response API. **CORS:** jangan pakai `*` di production — set `ALLOW_ORIGIN` ke origin frontend saja (mis. `https://namaanda.com`); kode menolak `*` dan tidak set header CORS. **Frontend (GitHub Pages):** hanya CSP lewat `<meta>` di `index.html`. Kontak mailto ✅; isi email + PGP. Analytics & form statis opsional. |
 | **Easter eggs & polish** | 🔲 | 404 ✅ (custom), robots.txt ✅, sitemap.xml ✅ (ganti yoursite.com sebelum deploy). CLI easter egg opsional. |
 
 **Langkah berikut (saran):** Isi data projects & posts di DB (atau pakai fallback statis), letakkan cv.pdf di web/public, ganti domain di sitemap.xml, lalu security headers lanjutan (CSP, analytics).
@@ -58,7 +58,7 @@ Fitur wajib agar pengunjung paham siapa Anda dalam 5 detik.
 - Fast Loading Performance
   1. Target Google Lighthouse Score > 90.
   2. Minimalkan JavaScript eksternal.
-  3. Gunakan format gambar modern (WebP/AVIF).
+  3. Gunakan format gambar modern (WebP/AVIF). Lihat [docs/ASSETS-AND-IMAGES.md](docs/ASSETS-AND-IMAGES.md): konversi PNG/JPG ke WebP; skrip opsional `npm run optimize:images` di `web/`.
 
 ## Phase 3: Content & Portfolio (Bukti Kompetensi)
 
@@ -70,13 +70,13 @@ Bagian ini menjual skill Anda.
 - Halaman Projects (Case Studies)
   1. Minimal 3 studi kasus nyata.
   2. Format: Masalah -> Solusi -> Tools -> Hasil (Quantifiable, misal: "Uptime naik ke 99.9%").
-  3. Fitur Khusus: Sertakan Diagram Topologi (buat di Draw.io/Excalidraw) untuk proyek jaringan.
+  3. Fitur Khusus: Sertakan Diagram Topologi (buat di Draw.io/Excalidraw). **Ekspor sebagai SVG** (prioritas, tajam & kecil) atau PNG lalu konversi ke WebP — jangan PNG biasa ukuran besar. Lihat [docs/ASSETS-AND-IMAGES.md](docs/ASSETS-AND-IMAGES.md).
 - Halaman Blog / Write-ups
   1. Artikel teknis (Tutorial, Troubleshooting, Post-Mortem).
   2. Fitur Code Syntax Highlighting (warna-warni untuk script).
 - Downloadable CV
-  1. Tombol download PDF (Update terbaru).
-  2. Pastikan PDF bersih dan tidak perlu password.
+  1. Tombol download PDF (Update terbaru); letakkan di `web/public/cv.pdf`.
+  2. Pastikan PDF bersih dan tidak perlu password. **Optimalkan ukuran ≤ 5 MB** (CI akan gagal jika > 5 MB). Lihat [docs/ASSETS-AND-IMAGES.md](docs/ASSETS-AND-IMAGES.md).
 - Certifications Badge
   1. Logo sertifikat (RHCE, CCNA, AWS, dll) dengan link validasi jika ada.
 
@@ -124,6 +124,9 @@ Fitur opsional untuk menunjukkan kreativitas & humor teknis.
 - Robots.txt & Sitemap.xml
   1. Pastikan SEO dasar terpenuhi agar mudah ditemukan recruiter.
   2. **Sudah ada:** `web/public/robots.txt`, `web/public/sitemap.xml` — ganti `yoursite.com` di sitemap dengan domain production sebelum deploy.
+- Meta Tags (Open Graph & Twitter Card)
+  1. Agar link portfolio tidak tampil kosong di LinkedIn/Twitter/WhatsApp: **og:title**, **og:description**, **og:image**, **og:url** dan **twitter:card** / **twitter:image** di `web/index.html` (sudah ditambahkan). Ganti `https://yoursite.com` dengan URL production.
+  2. Gambar OG: **landscape 1200×630 px**, simpan di `web/public/og-image.png`. Lihat [docs/SEO-SOCIAL.md](docs/SEO-SOCIAL.md).
 - 404 Page Custom
   1. Buat halaman 404 yang unik (misal: "Error 404: Route Not Found" dengan gaya pesan error Cisco/Linux).
 
@@ -165,4 +168,5 @@ Fitur opsional untuk menunjukkan kreativitas & humor teknis.
 | 5 | DNS (SPF, DKIM, DMARC untuk email) | 🔲 |
 | 6 | CLI easter egg / /ssh | 🔲 |
 | 6 | robots.txt, sitemap.xml | ✅ |
+| 6 | Meta OG & Twitter Card (index.html + og-image 1200×630) | ✅ (ganti yoursite.com & tambah og-image.png sebelum deploy) |
 | 6 | 404 page custom | ✅ |

@@ -53,6 +53,9 @@ onMounted(async () => {
     <p class="text-neutral-600 dark:text-neutral-400 max-w-2xl">
       Tutorial, troubleshooting, dan post-mortem. Code snippet memakai syntax highlighting.
     </p>
+    <p v-if="useFallback" class="text-sm text-amber-600 dark:text-amber-400">
+      API tidak tersedia; menampilkan data contoh.
+    </p>
     <p v-if="loading" class="text-neutral-500 dark:text-neutral-400">Memuat…</p>
     <ul v-else class="space-y-6">
       <li

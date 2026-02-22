@@ -99,6 +99,9 @@ onMounted(async () => {
 <template>
   <article v-if="post" class="space-y-6">
     <RouterLink to="/blog" class="text-sm text-neutral-500 dark:text-neutral-400 hover:underline">← Blog</RouterLink>
+    <p v-if="useFallback" class="text-sm text-amber-600 dark:text-amber-400">
+      API tidak tersedia; menampilkan data contoh.
+    </p>
     <header>
       <h1 class="text-3xl font-bold text-neutral-900 dark:text-white">{{ post.title }}</h1>
       <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-1">{{ post.date }}</p>

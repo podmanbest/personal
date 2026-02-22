@@ -12,7 +12,7 @@ Situs personal/portfolio dengan **backend API (Go)** dan **frontend (Vue 3 + Vit
 | Frontend | Vue 3, Vite, Tailwind | `web/`   |
 
 - **API:** Health, status, login (JWT), endpoint publik (skills, projects, posts), dan area admin (CRUD kategori & skills).
-- **Web:** SPA dengan halaman Beranda, About, Skills, Projects, Blog, Contact, Status, serta dashboard admin (login terlebih dahulu).
+- **Web:** SPA dengan halaman Beranda, About, Skills, Projects, Blog, Contact, Status, serta dashboard admin (login terlebih dahulu). Jika API down, Skills/Projects/Blog menampilkan **fallback data statis** (graceful degradation) dan pesan “API tidak tersedia; menampilkan data contoh.”
 
 ---
 
@@ -121,6 +121,8 @@ Token JWT berlaku 7 hari. Konfigurasi env (PORT, DB, ADMIN_*, JWT_SECRET, CORS):
 ## Dokumentasi lebih lanjut
 
 - [docs/DEPLOY.md](docs/DEPLOY.md) — **Strategi hosting** (frontend vs backend), env backend, CI/CD & GitHub Pages
+- [docs/ASSETS-AND-IMAGES.md](docs/ASSETS-AND-IMAGES.md) — Gambar (WebP/AVIF), diagram SVG/WebP, cv.pdf ≤ 5 MB, skrip `npm run optimize:images`
+- [docs/SEO-SOCIAL.md](docs/SEO-SOCIAL.md) — Open Graph & Twitter Card (meta tags), gambar OG 1200×630, ganti yoursite.com sebelum deploy
 - [docs/STRUKTUR-PROYEK.md](docs/STRUKTUR-PROYEK.md) — Lokasi file berdasarkan fungsi (backend & frontend)
 - [docs/RUN-API.md](docs/RUN-API.md) — Menjalankan API, migrasi, Makefile
 - [api/README.md](api/README.md) — Quick start & endpoint API

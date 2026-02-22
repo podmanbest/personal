@@ -16,10 +16,16 @@ Stack: **Vue 3**, **Vue Router**, **Vite**, **Tailwind CSS**.
 - `npm run build` — build produksi ke `dist/`
 - `npm run preview` — preview build
 
-## Konten statis
+## Konten statis & aset
 
-- **CV:** Letakkan `cv.pdf` di `web/public/` agar tombol "Download CV" di Home berfungsi (Phase 3 ToDo). PDF sebaiknya tanpa password.
+- **CV:** Letakkan `cv.pdf` di `web/public/`. Ukuran **≤ 5 MB** (CI gagal jika lebih). PDF tanpa password. Lihat [docs/ASSETS-AND-IMAGES.md](../ASSETS-AND-IMAGES.md).
+- **Gambar:** Gunakan WebP/AVIF; diagram topologi ekspor SVG atau WebP. Skrip: `npm run optimize:images` (konversi PNG/JPG → WebP di `public/` dan `src/assets/`). Lihat [docs/ASSETS-AND-IMAGES.md](../ASSETS-AND-IMAGES.md).
+- **Social preview (OG):** Letakkan gambar **1200×630 px** di `web/public/og-image.png`; meta OG/Twitter ada di `index.html`. Ganti `yoursite.com` dengan URL production. Lihat [docs/SEO-SOCIAL.md](../SEO-SOCIAL.md).
 - **Sitemap (Phase 6):** Edit `web/public/sitemap.xml` — ganti `https://yoursite.com` dengan URL production Anda.
+
+## Graceful degradation (API down)
+
+Jika backend API tidak tersedia (maintenance, error, atau CORS), halaman **Skills**, **Projects**, **Blog**, dan **BlogPost** tidak menampilkan error kosong atau loading tanpa akhir. Logika: `try { fetch(api) } catch { useFallback = true }`; jika `!r.ok` juga set fallback. Data fallback (JSON statis di dalam kode) ditampilkan dan pesan “API tidak tersedia; menampilkan data contoh.” ditampilkan. Fallback ada di: `Skills.vue`, `Projects.vue`, `Blog.vue`, `BlogPost.vue`.
 
 ## Env
 

@@ -49,6 +49,17 @@ jobs:
           cache: 'npm'
           cache-dependency-path: web/package-lock.json
 
+      - name: Check asset size (cv.pdf ≤ 5MB)
+        run: |
+          if [ -f web/public/cv.pdf ]; then
+            size=$(stat -c%s web/public/cv.pdf)
+            max=$((5 * 1024 * 1024))
+            if [ "$size" -gt "$max" ]; then
+              echo "::error::web/public/cv.pdf exceeds 5MB (current: $(( size / 1024 / 1024 ))MB). Optimize the PDF or reduce file size."
+              exit 1
+            fi
+          fi
+
       - name: Install & build
         working-directory: web
         run: |

@@ -33,7 +33,13 @@ Tidak perlu kode tambahan di repo jika production sudah HTTPS. HSTS untuk **resp
 
 ---
 
-## 2. Security Headers — Backend (Go API)
+## 2. CORS — Hanya origin spesifik (bukan *)
+
+Middleware CORS di **`api/internal/middleware/cors.go`** memakai env **`ALLOW_ORIGIN`**. Jika nilai **`*`**, header CORS **tidak diset** (backend log peringatan). Di **production** wajib set origin frontend yang konkret, mis. `https://namaanda.com` atau `https://username.github.io`. Jangan set `ALLOW_ORIGIN=*` di production. Development: `ALLOW_ORIGIN=http://localhost:5173`. Lihat `api/configs/.env.example`.
+
+---
+
+## 3. Security Headers — Backend (Go API)
 
 Header ini berlaku untuk **respons API** (setiap request ke backend Go). Karena API di-host di server Anda (PaaS/VPS), Anda punya kontrol penuh. Semua di **`api/internal/middleware/middleware.go`** (middleware `SecurityHeaders`).
 
@@ -53,7 +59,7 @@ CSP pada response API hanya berlaku untuk dokumen yang memuat response tersebut.
 
 ---
 
-## 3. CSP untuk Frontend (Vue / SPA) — meta tag saja di GitHub Pages
+## 4. CSP untuk Frontend (Vue / SPA) — meta tag saja di GitHub Pages
 
 SPA di-serve dari **static host** (GitHub Pages, dll.). Karena **GitHub Pages tidak mengizinkan custom response headers**, satu-satunya cara mengatur CSP untuk halaman HTML Anda adalah **meta tag** di **`web/index.html`**. Pastikan implementasi CSP di Vue/SPA memakai meta tag ini (bukan mengandalkan header dari server):
 
@@ -70,7 +76,7 @@ SPA di-serve dari **static host** (GitHub Pages, dll.). Karena **GitHub Pages ti
 
 ---
 
-## 4. Kontak Aman (Vue)
+## 5. Kontak Aman (Vue)
 
 | Item | Implementasi |
 |------|--------------|
@@ -83,7 +89,7 @@ Tidak ada perubahan wajib di Go; kontak sepenuhnya di frontend (mailto / form ek
 
 ---
 
-## 5. Privacy-Friendly Analytics (Vue)
+## 6. Privacy-Friendly Analytics (Vue)
 
 Jangan pakai Google Analytics. Pilih salah satu:
 
@@ -99,7 +105,7 @@ Agar tidak selalu aktif di dev, bisa pakai env (mis. `VITE_ANALYTICS_DOMAIN`) da
 
 ---
 
-## 6. Hide Server Info (Go)
+## 7. Hide Server Info (Go)
 
 Pastikan response API tidak membocorkan versi server:
 
