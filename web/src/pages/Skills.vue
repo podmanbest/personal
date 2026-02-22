@@ -42,8 +42,7 @@ onMounted(async () => {
   try {
     const r = await fetch(skillsUrl())
     if (!r.ok) {
-      if (r.status === 503) useFallback.value = true
-      else useFallback.value = true
+      useFallback.value = true
       return
     }
     const data = await r.json()

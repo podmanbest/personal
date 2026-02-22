@@ -3,6 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"net/http"
+	"strings"
 )
 
 const (
@@ -53,4 +54,9 @@ func AllowMethods(w http.ResponseWriter, r *http.Request, methods ...string) boo
 // DecodeJSON decodes request body into v. Caller should close r.Body if needed.
 func DecodeJSON(r *http.Request, v interface{}) error {
 	return json.NewDecoder(r.Body).Decode(v)
+}
+
+// SlugFromPath returns the path segment after prefix, trimmed. Example: SlugFromPath("/api/posts/foo", "/api/posts/") => "foo".
+func SlugFromPath(path, prefix string) string {
+	return strings.Trim(strings.TrimPrefix(path, prefix), "/")
 }

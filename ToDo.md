@@ -4,18 +4,18 @@
 
 | Area | Status | Keterangan |
 |------|--------|------------|
-| **Backend API** | ✅ | Go: `/health`, `/status`, `/api/skills`, `/login`, `/admin` (JWT), middleware CORS & security headers. |
+| **Backend API** | ✅ | Go: `/health`, `/status`, `/api/skills`, `/login`, `/admin` (JWT). CRUD admin: `/admin/skill-categories`, `/admin/skills`. Middleware CORS & security headers. |
 | **Database** | ✅ | MySQL/MariaDB opsional, migrasi (001 + 002), schema users, skills, projects, posts, dll. |
 | **Config & env** | ✅ | `api/configs/.env`, DSN dari DB_DSN atau DB_USER/DB_PASSWORD/DB_HOST/DB_PORT/DB_NAME. |
 | **Dokumentasi** | ✅ | `docs/api/` (README, DATABASE, DATABASE-SETUP), RUN-API, DEPLOY, STRUKTUR-PROYEK. |
 | **CI/CD** | ✅ | GitHub Actions: build + test API & Web, deploy ke GitHub Pages, auto-merge PR. |
 | **Tests** | ✅ | `api/tests/`: health, auth, status, admin, skills, middleware, database. |
-| **Frontend (Web)** | ✅ | Vue 3 + Vite: Hero, Nav (Home, About, Skills, Projects, Blog, Contact, Status), dark mode, responsive, **Skills dari API** (fallback statis), Login/Admin/Status pakai API. |
+| **Frontend (Web)** | ✅ | Vue 3 + Vite: Hero, Nav, dark mode, responsive, Skills/Projects/Blog dari API, Login/Status. **Admin dashboard**: Overview, CRUD Kategori & Skills. CV download (letakkan cv.pdf di web/public). Certifications di About. |
 | **Domain & hosting** | 🔲 | Pilih domain, pastikan GitHub Pages / custom domain jika perlu. |
-| **Security hardening** | 🔲 | CSP, HSTS, kontak aman (mailto/form statis), analytics privacy-friendly (Phase 4). |
-| **Easter eggs & polish** | 🔲 | 404 custom, robots.txt, sitemap, CLI easter egg (Phase 6). |
+| **Security hardening** | 🔲 | CSP lengkap, HSTS, kontak aman (mailto/form statis), analytics privacy-friendly (Phase 4). |
+| **Easter eggs & polish** | 🔲 | 404 ✅ (custom), robots.txt ✅, sitemap.xml ✅ (ganti yoursite.com sebelum deploy). CLI easter egg opsional. |
 
-**Langkah berikut (saran):** Isi konten frontend (Skills dari API, Projects, Blog), lalu domain, security headers lanjutan, dan polish (404, sitemap).
+**Langkah berikut (saran):** Isi data projects & posts di DB (atau pakai fallback statis), letakkan cv.pdf di web/public, ganti domain di sitemap.xml, lalu security headers lanjutan (CSP, analytics).
 
 ---
 
@@ -120,13 +120,14 @@ Fitur opsional untuk menunjukkan kreativitas & humor teknis.
   2. Atau buat halaman /ssh yang mensimulasikan terminal browser (menggunakan library seperti xterm.js).
 - Robots.txt & Sitemap.xml
   1. Pastikan SEO dasar terpenuhi agar mudah ditemukan recruiter.
+  2. **Sudah ada:** `web/public/robots.txt`, `web/public/sitemap.xml` — ganti `yoursite.com` di sitemap dengan domain production sebelum deploy.
 - 404 Page Custom
   1. Buat halaman 404 yang unik (misal: "Error 404: Route Not Found" dengan gaya pesan error Cisco/Linux).
 
 ## Prioritas eksekusi (saran)
 
-- **Minggu 1:** Setup domain (jika belum), pastikan repo & CI/CD jalan. Selesaikan halaman frontend (Hero, Nav, Skills ambil dari API). (Phase 1 & 2)
-- **Minggu 2:** Isi konten (Skills, Projects, CV). Jangan perfeksionis, yang penting ada isinya. (Phase 3)
+- **Minggu 1:** Setup domain (jika belum), pastikan repo & CI/CD jalan. Frontend & admin dashboard sudah siap (Hero, Nav, Skills dari API, CRUD kategori & skills). (Phase 1 & 2)
+- **Minggu 2:** Isi konten (Projects, Blog, CV). Jangan perfeksionis, yang penting ada isinya. (Phase 3)
 - **Minggu 3:** Hardening security (CSP, HSTS, kontak aman, analytics privacy-friendly). (Phase 4)
 - **Minggu 4:** Polish, testing mobile, 404/sitemap/robots.txt, launch. (Phase 5 & 6)
 
@@ -144,10 +145,11 @@ Fitur opsional untuk menunjukkan kreativitas & humor teknis.
 | 2 | Dark mode toggle | ✅ |
 | 2 | Fast loading (Lighthouse > 90) | 🔲 |
 | 3 | Halaman Skills (data dari API) | ✅ |
-| 3 | Halaman Projects (min 3 case study) | 🔲 |
-| 3 | Blog / write-ups, syntax highlighting | 🔲 |
-| 3 | Downloadable CV (PDF) | 🔲 |
-| 3 | Certifications badge | 🔲 |
+| 3 | Admin dashboard (kelola kategori & skills) | ✅ |
+| 3 | Halaman Projects (min 3 case study, dari API + fallback) | ✅ |
+| 3 | Blog / write-ups, syntax highlighting (highlight.js) | ✅ |
+| 3 | Downloadable CV (PDF): letakkan cv.pdf di web/public | ✅ |
+| 3 | Certifications badge (section di About) | ✅ |
 | 4 | HTTPS/SSL (Pages default) | ✅ |
 | 4 | Security headers (X-Content-Type-Options, dll.) | ✅ |
 | 4 | CSP, X-Frame-Options lengkap | 🔲 |
@@ -159,5 +161,5 @@ Fitur opsional untuk menunjukkan kreativitas & humor teknis.
 | 5 | Backup strategy (remote repo) | 🔲 |
 | 5 | DNS (SPF, DKIM, DMARC untuk email) | 🔲 |
 | 6 | CLI easter egg / /ssh | 🔲 |
-| 6 | robots.txt, sitemap.xml | 🔲 |
-| 6 | 404 page custom | 🔲 |
+| 6 | robots.txt, sitemap.xml | ✅ |
+| 6 | 404 page custom | ✅ |

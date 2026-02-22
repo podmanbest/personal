@@ -48,6 +48,8 @@ Dokumen ini memetakan lokasi file di repository berdasarkan **fungsi** (apa pera
 | `api/internal/handlers/status.go` | Status page (uptime, dll.) |
 | `api/internal/handlers/auth.go` | Login, token JWT |
 | `api/internal/handlers/skills.go` | GET /api/skills (list skills, public) |
+| `api/internal/handlers/projects.go` | GET /api/projects (list), GET /api/projects/:slug (detail + tools) |
+| `api/internal/handlers/posts.go` | GET /api/posts (list published), GET /api/posts/:slug (detail) |
 | `api/internal/handlers/admin/overview.go` | GET /admin (overview, perlu auth) |
 | `api/internal/handlers/admin/categories.go` | CRUD /admin/skill-categories |
 | `api/internal/handlers/admin/skills.go` | CRUD /admin/skills |

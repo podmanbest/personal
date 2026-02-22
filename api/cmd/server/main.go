@@ -40,6 +40,10 @@ func main() {
 	mux.HandleFunc("/health", handlers.Health)
 	mux.HandleFunc("/status", handlers.Status(cfg.StartTime, db))
 	mux.HandleFunc("/api/skills", handlers.SkillsList(db))
+	mux.HandleFunc("/api/projects", handlers.ProjectsList(db))
+	mux.HandleFunc("/api/projects/", handlers.ProjectBySlug(db))
+	mux.HandleFunc("/api/posts", handlers.PostsList(db))
+	mux.HandleFunc("/api/posts/", handlers.PostBySlug(db))
 	mux.HandleFunc("/login", handlers.Login(cfg))
 	// Admin dashboard API (CRUD) — paket handlers/admin
 	mux.Handle("/admin/skill-categories", middleware.RequireAuth(cfg, admin.Categories(db)))
