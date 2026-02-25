@@ -50,7 +50,7 @@ export default function Home() {
             />
           )}
           <h1 style={styles.heroTitle}>{user?.full_name || 'Portfolio'}</h1>
-          <p style={styles.heroHeadline}>{user?.headline || 'Selamat datang di portfolio saya.'}</p>
+          <p style={styles.heroHeadline}>{user?.headline || 'Ahli Infrastruktur Jaringan & Administrasi Sistem.'}</p>
           <div style={styles.cta}>
             <Link to="/proyek" className="btn btn-primary">Lihat Proyek</Link>
             <Link to="/kontak" className="btn btn-outline">Hubungi Saya</Link>
