@@ -171,7 +171,7 @@ export const resourceConfigs = {
       { key: 'title', label: 'Judul', type: 'text', required: true },
       { key: 'slug', label: 'Slug', type: 'text' },
       { key: 'excerpt', label: 'Kutipan', type: 'textarea' },
-      { key: 'content', label: 'Konten', type: 'textarea' },
+      { key: 'content', label: 'Konten', type: 'markdown', minHeight: 400 },
       { key: 'published_at', label: 'Tanggal Publikasi', type: 'datetime-local' },
       { key: 'is_published', label: 'Dipublikasi', type: 'checkbox' },
     ],

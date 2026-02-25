@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { getList, getOne, create, update, remove } from '../api'
 import { resourceConfigs } from '../resourceConfig'
+import MarkdownEditor from '../components/MarkdownEditor'
 
 const PER_PAGE = 15
 
@@ -89,7 +90,10 @@ export default function ResourcePage({ config }) {
     cfg.formFields.forEach((f) => {
       let v = formData[f.key]
       if (f.type === 'checkbox') v = v ? 1 : 0
-      if (v === '' || v == null) return
+      if (v === '' || v == null) {
+        if (f.type === 'markdown') body[f.key] = ''
+        return
+      }
       body[f.key] = v
     })
     try {
@@ -241,7 +245,7 @@ export default function ResourcePage({ config }) {
 
       {formOpen && (
         <div style={modalStyles.overlay} onClick={closeForm}>
-          <div style={modalStyles.box} onClick={(e) => e.stopPropagation()}>
+          <div style={config.path === 'blog-posts' ? { ...modalStyles.box, maxWidth: 900, width: '95%', minHeight: '85vh' } : modalStyles.box} onClick={(e) => e.stopPropagation()}>
             <h3 style={{ margin: '0 0 1rem' }}>{editing ? 'Edit' : 'Tambah'}</h3>
             <form onSubmit={handleSubmit}>
               {cfg.formFields.map((f) => (
@@ -255,6 +259,13 @@ export default function ResourcePage({ config }) {
                       onChange={(e) => setField(f.key, e.target.value)}
                       rows={3}
                       required={f.required}
+                    />
+                  )}
+                  {f.type === 'markdown' && (
+                    <MarkdownEditor
+                      value={formData[f.key] ?? ''}
+                      onChange={(v) => setField(f.key, v ?? '')}
+                      minHeight={f.minHeight}
                     />
                   )}
                   {f.type === 'checkbox' && (
