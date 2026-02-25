@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Outlet, Link, useLocation } from 'react-router-dom'
+import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom'
+import { clearToken } from '../auth'
 
 const menu = [
   { to: '/', label: 'Dashboard' },
@@ -19,10 +20,17 @@ const menu = [
 ];
 
 export default function AdminLayout() {
-  const location = useLocation();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const location = useLocation()
+  const navigate = useNavigate()
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
-  const closeSidebar = () => setSidebarOpen(false);
+  const closeSidebar = () => setSidebarOpen(false)
+
+  const handleLogout = () => {
+    clearToken()
+    closeSidebar()
+    navigate('/login')
+  }
 
   return (
     <div className="admin-wrapper" style={styles.wrapper}>
@@ -51,7 +59,7 @@ export default function AdminLayout() {
             </Link>
           ))}
         </nav>
-        <Link to="/login" style={styles.logout} onClick={closeSidebar}>Logout</Link>
+        <button type="button" style={styles.logout} onClick={handleLogout}>Logout</button>
       </aside>
       <div style={styles.main} className="admin-main">
         <header style={styles.header} className="admin-header">
@@ -94,7 +102,18 @@ const styles = {
     fontSize: '0.875rem',
   },
   navLinkActive: { color: 'var(--color-primary)', fontWeight: 500 },
-  logout: { padding: '0.5rem 1rem', fontSize: '0.875rem', color: 'var(--color-text-muted)' },
+  logout: {
+    display: 'block',
+    width: '100%',
+    padding: '0.5rem 1rem',
+    fontSize: '0.875rem',
+    color: 'var(--color-text-muted)',
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    textAlign: 'left',
+    font: 'inherit',
+  },
   main: { flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 },
   header: {
     padding: '1rem 1.5rem',
