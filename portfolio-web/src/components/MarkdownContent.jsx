@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { getTheme } from '../theme'
 
 export default function MarkdownContent({ content = '', className, style }) {
+  const [theme, setThemeState] = useState(() => (typeof document !== 'undefined' ? (document.documentElement.getAttribute('data-theme') || 'dark') : 'dark'))
+  useEffect(() => {
+    const onThemeChange = () => setThemeState(getTheme())
+    window.addEventListener('themechange', onThemeChange)
+    return () => window.removeEventListener('themechange', onThemeChange)
+  }, [])
+  const highlightStyle = theme === 'light' ? oneLight : oneDark
   return (
     <div className={`markdown-content ${className || ''}`.trim()} style={style}>
       <ReactMarkdown
@@ -14,7 +23,7 @@ export default function MarkdownContent({ content = '', className, style }) {
             if (!inline && match) {
               return (
                 <SyntaxHighlighter
-                  style={oneDark}
+                  style={highlightStyle}
                   language={match[1]}
                   PreTag="div"
                   customStyle={{
