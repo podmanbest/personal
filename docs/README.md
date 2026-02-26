@@ -42,6 +42,12 @@ Diagram dan ERD: (1) arsitektur stack (klien–API–DB), (2) Entity Relationshi
 
 ---
 
+### [PANDUAN_DOKUMENTASI_RPL.md](PANDUAN_DOKUMENTASI_RPL.md)
+
+Panduan dokumentasi RPL/SDLC: tahap Analisis Kebutuhan (BRD, SRS, User Story, MoSCoW), Perancangan (SDD, ERD, UML, API), Implementasi (README, Changelog), Pengujian (Test Plan, UAT), Deployment & Maintenance (Deployment Guide, User Manual). Memetakan dokumen proyek ke tiap tahap SDLC dan mencatat celah/rekomendasi. Berguna untuk **mahasiswa RPL**, **tech lead**, dan **QA** yang ingin struktur dokumen mengacu standar SDLC.
+
+---
+
 ## Dokumen di luar folder docs/
 
 | Dokumen | Lokasi | Isi | Untuk siapa |
@@ -62,4 +68,5 @@ Diagram dan ERD: (1) arsitektur stack (klien–API–DB), (2) Entity Relationshi
 - Ingin **audit keamanan** → baca [AUDIT_REPORT_ISO27001.md](AUDIT_REPORT_ISO27001.md).
 - Ingin **ringkasan rancangan/plan** → baca [RINGKASAN_RANCANGAN.md](RINGKASAN_RANCANGAN.md).
 - Ingin **diagram dan ERD** → baca [DIAGRAM_DAN_ERD.md](DIAGRAM_DAN_ERD.md).
+- Ingin **panduan dokumentasi RPL/SDLC** → baca [PANDUAN_DOKUMENTASI_RPL.md](PANDUAN_DOKUMENTASI_RPL.md).
 - Ingin **jalankan / deploy** → [README.md](../README.md) dan [DEPLOY.md](../DEPLOY.md); setup per app di README masing-masing subproyek.
