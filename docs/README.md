@@ -72,6 +72,24 @@ Laporan audit keamanan informasi (API & admin) mengacu kontrol Annex A ISO/IEC 2
 
 ---
 
+### [AUDIT_PROJECT.md](AUDIT_PROJECT.md)
+
+Audit proyek (struktur monorepo, dokumentasi, dependensi, konfigurasi, naming, linting, testing). Ringkasan temuan dan rekomendasi prioritas. Berguna untuk **tech lead** dan **developer** yang ingin tinjauan kesehatan proyek.
+
+---
+
+### [AUDIT_MENYELURUH.md](AUDIT_MENYELURUH.md)
+
+**Audit menyeluruh** proyek: konsolidasi struktur, dokumentasi, kode, dependensi, keamanan (ISO 27001:2022), konfigurasi, dan deploy. Merujuk ke AUDIT_PROJECT dan AUDIT_REPORT_ISO27001. Berguna untuk **tech lead**, **auditor**, dan **stakeholder** yang membutuhkan gambaran tunggal hasil audit.
+
+---
+
+### [AUDIT_API.md](AUDIT_API.md)
+
+**Audit API** (portfolio-api): routing, autentikasi, validasi, respons, CORS, rate limit, konfigurasi, dan testing. Ringkasan temuan dan rekomendasi. Berguna untuk **developer backend** dan **tech lead** yang meninjau atau memelihara API.
+
+---
+
 ### [PANDUAN_DOKUMENTASI_RPL.md](PANDUAN_DOKUMENTASI_RPL.md)
 
 Panduan dokumentasi RPL/SDLC: tahap Analisis Kebutuhan (BRD, SRS, User Story, MoSCoW), Perancangan (SDD, ERD, UML, API), Implementasi (README, Changelog), Pengujian (Test Plan, UAT), Deployment & Maintenance (Deployment Guide, User Manual). Memetakan dokumen proyek ke tiap tahap SDLC dan ke artefak Scrum, serta mencatat celah/rekomendasi. Berguna untuk **mahasiswa RPL**, **tech lead**, **QA**, dan **dosen/penguji** yang ingin struktur dokumen mengacu standar SDLC dan Scrum.
@@ -103,5 +121,8 @@ Panduan dokumentasi RPL/SDLC: tahap Analisis Kebutuhan (BRD, SRS, User Story, Mo
 - Ingin **publik vs admin API** → baca [PUBLIKASI_WEB.md](PUBLIKASI_WEB.md).
 - Ingin **alur konten blog post end-to-end** → baca [ALUR_KONTEN_POST.md](ALUR_KONTEN_POST.md).
 - Ingin **audit keamanan** → baca [AUDIT_REPORT_ISO27001.md](AUDIT_REPORT_ISO27001.md).
+- Ingin **audit proyek (struktur, docs, deps)** → baca [AUDIT_PROJECT.md](AUDIT_PROJECT.md).
+- Ingin **audit menyeluruh (konsolidasi semua audit)** → baca [AUDIT_MENYELURUH.md](AUDIT_MENYELURUH.md).
+- Ingin **audit API (Lumen)** → baca [AUDIT_API.md](AUDIT_API.md).
 - Ingin **panduan dokumentasi RPL/SDLC & mapping Scrum** → baca [PANDUAN_DOKUMENTASI_RPL.md](PANDUAN_DOKUMENTASI_RPL.md).
 - Ingin **jalankan / deploy** → [README.md](../README.md) dan [DEPLOY.md](../DEPLOY.md); setup per app di README masing-masing subproyek.

@@ -43,15 +43,15 @@ export default function Login() {
   }
 
   return (
-    <div style={styles.wrapper}>
-      <div style={styles.card}>
-        <h1 style={styles.title}>Portfolio Admin</h1>
-        <p style={styles.placeholder}>
+    <div className="min-h-screen flex items-center justify-center p-6 bg-[var(--color-bg)]">
+      <div className="w-full max-w-[400px] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 shadow-[var(--shadow-md)]">
+        <h1 className="text-center text-2xl font-semibold text-[var(--color-text)] mb-2">Portfolio Admin</h1>
+        <p className="text-center text-sm text-[var(--color-text-muted)] mb-6">
           Masukkan username dan password untuk masuk.
         </p>
-        <form onSubmit={handleSubmit}>
-          <div style={styles.field}>
-            <label htmlFor="username" style={styles.label}>Username</label>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label htmlFor="username" className="block text-sm font-medium text-[var(--color-text)] mb-1.5">Username</label>
             <input
               id="username"
               type="text"
@@ -59,12 +59,12 @@ export default function Login() {
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Username"
               autoComplete="username"
-              style={styles.input}
               disabled={loading}
+              className="w-full py-2.5 px-3.5 text-[var(--color-text)] bg-[var(--color-bg)] border border-[var(--color-border)] rounded-[var(--radius-md)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent disabled:opacity-60 transition-shadow"
             />
           </div>
-          <div style={styles.field}>
-            <label htmlFor="password" style={styles.label}>Password</label>
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-[var(--color-text)] mb-1.5">Password</label>
             <input
               id="password"
               type="password"
@@ -72,50 +72,22 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               autoComplete="current-password"
-              style={styles.input}
               disabled={loading}
+              className="w-full py-2.5 px-3.5 text-[var(--color-text)] bg-[var(--color-bg)] border border-[var(--color-border)] rounded-[var(--radius-md)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent disabled:opacity-60 transition-shadow"
             />
           </div>
-          {error && <p style={styles.error}>{error}</p>}
-          <button type="submit" className="btn btn-primary" style={styles.btn} disabled={loading}>
+          {error && (
+            <p className="text-sm text-[var(--color-danger)]" role="alert">{error}</p>
+          )}
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-2.5 px-4 text-sm font-medium text-white bg-[var(--color-primary)] rounded-[var(--radius-md)] hover:bg-[var(--color-primary-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2 focus:ring-offset-[var(--color-bg)] disabled:opacity-60 transition-colors"
+          >
             {loading ? 'Memeriksa...' : 'Masuk'}
           </button>
         </form>
       </div>
     </div>
   )
-}
-
-const styles = {
-  wrapper: {
-    minHeight: '100vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '1.5rem',
-  },
-  card: {
-    background: 'var(--color-surface)',
-    border: '1px solid var(--color-border)',
-    borderRadius: 12,
-    padding: '2rem',
-    maxWidth: 400,
-    width: '100%',
-  },
-  title: { margin: '0 0 1rem', fontSize: '1.5rem', textAlign: 'center' },
-  placeholder: { color: 'var(--color-text-muted)', fontSize: '0.9375rem', marginBottom: '1.25rem', textAlign: 'center' },
-  field: { marginBottom: '1rem' },
-  label: { display: 'block', marginBottom: '0.375rem', fontSize: '0.875rem' },
-  input: {
-    width: '100%',
-    padding: '0.625rem 0.875rem',
-    fontSize: '1rem',
-    background: 'var(--color-bg)',
-    border: '1px solid var(--color-border)',
-    borderRadius: 8,
-    color: 'var(--color-text)',
-    boxSizing: 'border-box',
-  },
-  error: { color: 'var(--color-danger)', fontSize: '0.875rem', margin: '0 0 1rem' },
-  btn: { width: '100%' },
 }

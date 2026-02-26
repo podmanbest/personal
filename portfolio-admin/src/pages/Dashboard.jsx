@@ -7,8 +7,6 @@ const BLOG_PREVIEW_BASE = import.meta.env.VITE_SITE_URL || ''
 export default function Dashboard() {
   const { counts, blogPublished, blogDraft, unreadMessages, recentPosts, loading } = useAdminSummary()
 
-  if (loading) return <p>Memuat...</p>
-
   const totalMessages = counts['contact-messages'] ?? 0
   const statCards = [
     { label: 'Total Projects', value: counts.projects ?? 0, sub: 'Proyek', to: '/projects' },
@@ -17,81 +15,80 @@ export default function Dashboard() {
   ]
 
   return (
-    <div>
-      <div style={styles.statsGrid}>
-        {statCards.map(({ label, value, sub, to, highlight }) => (
-          <Link key={to} to={to} style={{ ...styles.statCard, ...(highlight ? styles.statCardHighlight : {}) }}>
-            <span style={styles.statValue}>{value}</span>
-            <span style={styles.statLabel}>{label}</span>
-            <span style={styles.statSub}>{sub}</span>
-          </Link>
-        ))}
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-xl font-semibold text-[var(--color-text)] tracking-tight">Dashboard</h1>
+        <p className="text-sm text-[var(--color-text-muted)] mt-0.5">Ringkasan konten dan pesan</p>
       </div>
 
-      <div style={styles.quickActions}>
-        <Link to="/blog-posts" style={styles.quickActionBtn}>+ Tulis Blog Baru</Link>
-        <Link to="/projects" style={styles.quickActionBtn}>+ Tambah Project</Link>
-      </div>
-
-      <section style={{ marginTop: '2rem' }}>
-        <h3 style={styles.sectionTitle}>Post terbaru</h3>
-        {recentPosts.length > 0 ? (
-          <ul style={styles.recentList}>
-            {recentPosts.map((post) => (
-              <li key={post.id} style={styles.recentItem}>
-                <span style={styles.recentTitle}>{post.title ?? `Post #${post.id}`}</span>
-                <span style={styles.recentMeta}>
-                  {post.is_published ? 'Published' : 'Draft'}
-                  {' · '}
-                  <Link to={`/blog-posts?edit=${post.id}`} style={styles.link}>Edit</Link>
-                  {post.slug && BLOG_PREVIEW_BASE && (
-                    <>
-                      {' · '}
-                      <a href={`${BLOG_PREVIEW_BASE.replace(/\/$/, '')}/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" style={styles.link}>
-                        Preview
-                      </a>
-                    </>
-                  )}
-                </span>
-              </li>
+      {loading ? (
+        <div className="flex items-center justify-center py-12">
+          <div className="loading-spinner" aria-hidden="true" />
+          <span className="sr-only">Memuat...</span>
+        </div>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {statCards.map(({ label, value, sub, to, highlight }) => (
+              <Link
+                key={to}
+                to={to}
+                className={`block rounded-[var(--radius-lg)] border p-5 transition-all hover:shadow-[var(--shadow-sm)] ${highlight ? 'border-[var(--color-primary)] bg-[var(--color-primary-muted)]' : 'border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-surface-elevated)]'}`}
+              >
+                <span className="block text-3xl font-bold text-[var(--color-text)]">{value}</span>
+                <span className="block mt-1 text-[0.9375rem] font-semibold text-[var(--color-text)]">{label}</span>
+                <span className="block mt-0.5 text-xs text-[var(--color-text-muted)]">{sub}</span>
+              </Link>
             ))}
-          </ul>
-        ) : (
-          <p style={{ color: 'var(--color-text-muted)', margin: 0 }}>Belum ada post.</p>
-        )}
-      </section>
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            <Link
+              to="/blog-posts"
+              className="inline-flex items-center px-4 py-2.5 text-sm font-medium text-white bg-[var(--color-primary)] rounded-[var(--radius-md)] hover:bg-[var(--color-primary-hover)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2 focus:ring-offset-[var(--color-bg)]"
+            >
+              + Tulis Blog Baru
+            </Link>
+            <Link
+              to="/projects"
+              className="inline-flex items-center px-4 py-2.5 text-sm font-medium text-white bg-[var(--color-primary)] rounded-[var(--radius-md)] hover:bg-[var(--color-primary-hover)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2 focus:ring-offset-[var(--color-bg)]"
+            >
+              + Tambah Project
+            </Link>
+          </div>
+
+          <section className="mt-8">
+            <h2 className="text-base font-semibold text-[var(--color-text)] mb-3">Post terbaru</h2>
+            {recentPosts.length > 0 ? (
+              <ul className="list-none p-0 m-0 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden">
+                {recentPosts.map((post) => (
+                  <li
+                    key={post.id}
+                    className="flex flex-wrap justify-between items-center gap-2 py-3 px-4 border-b border-[var(--color-border)] last:border-b-0"
+                  >
+                    <span className="font-medium text-[var(--color-text)]">{post.title ?? `Post #${post.id}`}</span>
+                    <span className="text-xs text-[var(--color-text-muted)]">
+                      {post.is_published ? 'Published' : 'Draft'}
+                      {' · '}
+                      <Link to={`/blog-posts?edit=${post.id}`} className="text-[var(--color-primary)] hover:underline">Edit</Link>
+                      {post.slug && BLOG_PREVIEW_BASE && (
+                        <>
+                          {' · '}
+                          <a href={`${BLOG_PREVIEW_BASE.replace(/\/$/, '')}/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" className="text-[var(--color-primary)] hover:underline">
+                            Preview
+                          </a>
+                        </>
+                      )}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-sm text-[var(--color-text-muted)]">Belum ada post.</p>
+            )}
+          </section>
+        </>
+      )}
     </div>
   )
-}
-
-const styles = {
-  statsGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1.25rem' },
-  statCard: {
-    background: 'var(--color-surface)',
-    border: '1px solid var(--color-border)',
-    borderRadius: 12,
-    padding: '1.5rem',
-    color: 'inherit',
-  },
-  statCardHighlight: { borderColor: 'var(--color-primary)', background: 'rgba(79, 70, 229, 0.08)' },
-  statValue: { display: 'block', fontSize: '2rem', fontWeight: 700 },
-  statLabel: { display: 'block', fontSize: '0.9375rem', fontWeight: 600, marginTop: '0.25rem' },
-  statSub: { display: 'block', fontSize: '0.8125rem', color: 'var(--color-text-muted)', marginTop: '0.25rem' },
-  quickActions: { display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '1.5rem' },
-  quickActionBtn: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    padding: '0.5rem 1rem',
-    fontSize: '0.9375rem',
-    fontWeight: 500,
-    borderRadius: 8,
-    background: 'var(--color-primary)',
-    color: 'white',
-  },
-  sectionTitle: { margin: '0 0 0.75rem', fontSize: '1rem', fontWeight: 600 },
-  link: { fontSize: '0.875rem', color: 'var(--color-primary)' },
-  recentList: { listStyle: 'none', margin: 0, padding: 0 },
-  recentItem: { padding: '0.5rem 0', borderBottom: '1px solid var(--color-border)', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem' },
-  recentTitle: { fontWeight: 500 },
-  recentMeta: { fontSize: '0.8125rem', color: 'var(--color-text-muted)' },
 }

@@ -1,18 +1,58 @@
 # Laporan Audit Keamanan Informasi — API & Admin (ISO/IEC 27001:2022)
 
 **Ruang lingkup:** portfolio-api (Lumen), portfolio-admin (React/Vite)  
-**Referensi:** Rencana Audit API dan Admin (Standar ISO 27001)  
-**Tanggal pelaksanaan:** 2026-02-26
+**Standar acuan:** ISO/IEC 27001:2022 (Information security management systems — Requirements), Annex A  
+**Tanggal pelaksanaan:** 2026-02-26 | **Revisi (penyelarasan standar):** 2026-02-27
+
+---
+
+## 0. Referensi normatif dan ruang lingkup audit
+
+- **ISO/IEC 27001:2022** — Persyaratan sistem manajemen keamanan informasi; Annex A berisi 93 kontrol yang dapat diterapkan sesuai penilaian risiko dan Statement of Applicability (SoA).
+- **ISO/IEC 27002:2022** — Panduan implementasi untuk kontrol Annex A (tidak dijadikan checklist wajib; digunakan sebagai acuan interpretasi).
+- **Ruang lingkup teknis:** Aplikasi web portfolio (backend Lumen, frontend admin React/Vite); tidak mencakup infrastruktur fisik, SDM, atau proses organisasi di luar kode dan konfigurasi yang diperiksa.
+- **Kontrol yang dinilai:** Hanya kontrol Annex A yang **relevan dan diterapkan** (applicable) untuk konteks aplikasi web ini. Kontrol yang tidak diterapkan (mis. fisik, aset perangkat keras) dicatat sebagai N/A dengan alasan singkat di bawah.
+
+### Pemetaan ke tema Annex A (ISO 27001:2022)
+
+| Tema Annex A | Jumlah kontrol (standar) | Kontrol yang dinilai dalam audit ini |
+|--------------|--------------------------|--------------------------------------|
+| Organizational (A.5) | 37 | A.5.2 (pembagian peran) |
+| Technological (A.8) | 34 | A.8.5, A.8.8, A.8.9, A.8.15, A.8.16, A.8.23, A.8.24, A.8.25, A.8.26 |
+| Physical (A.7) | 14 | N/A — tidak dalam ruang lingkup (infrastruktur di luar kode) |
+| People (A.6) | 8 | N/A — tidak dalam ruang lingkup (pelatihan/kebijakan SDM) |
+
+*Kontrol lain di A.5 atau A.8 dapat ditambahkan ke SoA organisasi sesuai penilaian risiko (mis. A.5.7 ancaman, A.8.28 pengembangan aman).*
 
 ---
 
 ## 1. Ringkasan eksekutif
 
-Audit mengacu pada kontrol Annex A ISO/IEC 27001:2022 yang relevan dengan aplikasi web. Sebagian besar kontrol **sesuai** dengan bukti yang diperiksa. Temuan utama: **observasi** untuk audit log keamanan, monitoring, dan kerentanan dependensi npm (moderate); **rekomendasi** untuk production (APP_DEBUG=false, CORS, HTTPS) didokumentasikan dalam checklist deployment.
+Audit mengacu pada kontrol Annex A ISO/IEC 27001:2022 yang **relevan dan diterapkan** untuk aplikasi web (API & admin). Sebagian besar kontrol yang dinilai **sesuai** (conform) dengan bukti yang diperiksa. Temuan utama: **observasi** untuk audit log keamanan (A.8.15), pemantauan kejadian (A.8.16), dan kerentanan dependensi npm (A.8.8); **rekomendasi** untuk production (APP_DEBUG=false, CORS, HTTPS) didokumentasikan dalam checklist deployment.
 
 ---
 
-## 2. Checklist per kontrol dan bukti
+## 2. Ringkasan Statement of Applicability (kontrol yang dinilai)
+
+| Kontrol Annex A | Judul (ringkas) | Diterapkan | Hasil audit |
+|-----------------|-----------------|------------|-------------|
+| A.5.2 | Pembagian tanggung jawab (peran) | Ya | Conform |
+| A.8.5 | Keamanan autentikasi | Ya | Conform |
+| A.8.8 | Manajemen kerentanan teknis | Ya | Conform (API); Observasi (npm moderate) |
+| A.8.9 | Konfigurasi manajemen | Ya | Conform |
+| A.8.15 | Logging (audit log) | Ya | Observasi |
+| A.8.16 | Pemantauan kejadian keamanan | Ya | Observasi |
+| A.8.23 | Filtering (web / transfer informasi) | Ya | Conform |
+| A.8.24 | Penggunaan kriptografi | Ya | Conform |
+| A.8.25 | Keamanan siklus hidup pengembangan | Ya | Observasi |
+| A.8.26 | Keamanan aplikasi | Ya | Conform |
+| A.8.28 | Secure coding | Ya | Conform |
+
+*Kontrol lain Annex A (A.5.x, A.6, A.7, A.8.x) tidak dinilai dalam audit ini karena ruang lingkup terbatas pada aplikasi web; dapat ditambahkan ke SoA organisasi sesuai penilaian risiko.*
+
+---
+
+## 3. Checklist per kontrol dan bukti
 
 ### A.5.2 — Pembagian tanggung jawab (information security roles)
 
@@ -131,7 +171,19 @@ Audit mengacu pada kontrol Annex A ISO/IEC 27001:2022 yang relevan dengan aplika
 
 ---
 
-## 3. Tindak lanjut prioritas
+### A.8.28 — Secure coding (pengembangan perangkat lunak aman)
+
+| Pertanyaan | Ya/Tidak | Bukti |
+|------------|----------|--------|
+| Rahasia tidak di kode sumber? | Ya | Token dan kredensial dari env/sessionStorage; tidak ada API key atau password hardcoded. |
+| Validasi input di sisi server? | Ya | Semua endpoint mutasi dan input publik (contact, login) memakai Validator Lumen; aturan max length, email, exists. |
+| Dependensi tercatat dan dapat di-audit? | Ya | composer.lock, package-lock.json; composer audit / npm audit dapat dijalankan. |
+
+**Temuan:** Conform untuk ruang lingkup aplikasi. Rekomendasi: pertahankan prosedur tinjauan kode dan jadwal audit dependensi (sesuai A.8.8).
+
+---
+
+## 4. Tindak lanjut prioritas
 
 | Prioritas | Tindak lanjut | Kontrol |
 |-----------|----------------|---------|
@@ -144,7 +196,7 @@ Audit mengacu pada kontrol Annex A ISO/IEC 27001:2022 yang relevan dengan aplika
 
 ---
 
-## 4. Checklist deployment (production)
+## 5. Checklist deployment (production)
 
 Gunakan checklist ini sebelum atau saat deploy production:
 
@@ -158,4 +210,11 @@ Gunakan checklist ini sebelum atau saat deploy production:
 
 ---
 
-*Dokumen ini merupakan output pelaksanaan rencana audit; hasil dapat digunakan untuk perbaikan berkelanjutan dan pemetaan ke ISO 27001.*
+## 6. Referensi normatif
+
+- ISO/IEC 27001:2022 — *Information security management systems — Requirements with guidance for use* (Annex A: 93 kontrol).
+- ISO/IEC 27002:2022 — *Information security, cybersecurity and privacy protection — Information security controls* (panduan implementasi Annex A).
+
+---
+
+*Dokumen ini diselaraskan dengan ISO/IEC 27001:2022 dan dapat digunakan untuk Statement of Applicability (SoA), perbaikan berkelanjutan, serta pemetaan temuan ke kontrol Annex A. Revisi 2026-02-27: penambahan referensi normatif, ruang lingkup, pemetaan tema Annex A, dan kontrol A.8.28 (secure coding).*

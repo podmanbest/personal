@@ -139,41 +139,39 @@ export default function AdminLayout() {
   const breadcrumbs = getBreadcrumbs(location.pathname)
 
   return (
-    <div className="admin-wrapper" style={styles.wrapper}>
+    <div className="flex min-h-screen bg-[var(--color-bg)]">
       <div
         className={`admin-sidebar-overlay ${sidebarOpen ? 'visible' : ''}`}
         onClick={closeSidebar}
         aria-hidden="true"
       />
       <aside
-        className={`admin-sidebar ${sidebarOpen ? 'admin-sidebar--open' : ''} ${sidebarCollapsed ? 'admin-sidebar--collapsed' : ''}`}
-        style={styles.sidebar}
+        className={`admin-sidebar flex flex-col shrink-0 border-r border-[var(--color-border)] bg-[var(--color-surface)] py-4 ${sidebarOpen ? 'admin-sidebar--open' : ''} ${sidebarCollapsed ? 'admin-sidebar--collapsed' : ''}`}
+        style={{ width: sidebarCollapsed ? 'var(--sidebar-collapsed-width)' : 'var(--sidebar-width)', minWidth: sidebarCollapsed ? 'var(--sidebar-collapsed-width)' : 'var(--sidebar-width)' }}
       >
-        <div style={styles.logo} className="admin-sidebar-label admin-logo-long">Portfolio Admin</div>
-        <div style={styles.logo} className="admin-logo-icon" aria-hidden="true">P</div>
-        <nav style={styles.nav} className="admin-nav">
+        <div className="admin-sidebar-label admin-logo-long px-4 pb-4 font-bold text-base text-[var(--color-text)]">Portfolio Admin</div>
+        <div className="admin-logo-icon hidden text-center font-bold text-xl py-2 text-[var(--color-text)]" aria-hidden="true">P</div>
+        <nav className="flex-1 overflow-auto px-0 admin-nav">
           {menuGroups.map((group, gIdx) => (
-            <div key={gIdx} style={styles.menuGroup}>
+            <div key={gIdx} className="mb-1">
               <button
                 type="button"
                 onClick={() => toggleGroup(gIdx)}
-                style={styles.groupButton}
-                className="admin-nav-group-btn"
+                className="admin-nav-group-btn flex w-full items-center justify-between px-4 py-2.5 text-[0.8125rem] font-semibold uppercase tracking-wide text-[var(--color-text-muted)] bg-transparent border-none cursor-pointer"
                 aria-expanded={isGroupOpen(gIdx)}
                 title={group.groupLabel}
               >
                 <span className="admin-sidebar-label">{group.groupLabel}</span>
-                <span style={{ ...styles.chevron, transform: isGroupOpen(gIdx) ? 'rotate(180deg)' : 'none' }}>▼</span>
+                <span className="text-[0.625rem] opacity-80 transition-transform duration-200" style={{ transform: isGroupOpen(gIdx) ? 'rotate(180deg)' : 'none' }}>▼</span>
               </button>
               {isGroupOpen(gIdx) && (
-                <div style={styles.dropdownItems}>
+                <div className="pl-2">
                   {group.items.map(({ to, label }) => (
                     <Link
                       key={to}
                       to={to}
                       onClick={closeSidebar}
-                      className={location.pathname === to ? 'admin-nav-link admin-nav-link--active' : 'admin-nav-link'}
-                      style={styles.navLink}
+                      className={`admin-nav-link block py-2.5 px-4 text-sm rounded-r-md ${location.pathname === to ? 'admin-nav-link--active' : ''}`}
                       title={label}
                     >
                       <span className="admin-nav-link-text">{label}</span>
@@ -184,27 +182,32 @@ export default function AdminLayout() {
             </div>
           ))}
         </nav>
-        <div className="admin-sidebar-footer" style={styles.sidebarFooter}>
+        <div className="admin-sidebar-footer border-t border-[var(--color-border)] pt-3 mt-auto px-2">
           <button
             type="button"
-            className="admin-theme-toggle"
+            className="admin-theme-toggle w-full"
             onClick={handleToggleTheme}
             aria-label={theme === 'dark' ? 'Gunakan tema terang' : 'Gunakan tema gelap'}
             title={theme === 'dark' ? 'Tema terang' : 'Tema gelap'}
           >
             {theme === 'dark' ? '☀️' : '🌙'}
           </button>
-          <button type="button" style={styles.collapseBtn} onClick={toggleSidebarCollapsed} title={sidebarCollapsed ? 'Perlebar sidebar' : 'Sempitkan sidebar'}>
+          <button
+            type="button"
+            className="w-full py-2 px-4 text-left text-xs text-[var(--color-text-muted)] bg-transparent border-none cursor-pointer rounded-[var(--radius-sm)] hover:bg-[var(--color-surface-elevated)] hover:text-[var(--color-text)] transition-colors"
+            onClick={toggleSidebarCollapsed}
+            title={sidebarCollapsed ? 'Perlebar sidebar' : 'Sempitkan sidebar'}
+          >
             {sidebarCollapsed ? '→' : '←'}
           </button>
         </div>
       </aside>
-      <div style={styles.main} className="admin-main">
-        <header style={styles.header} className="admin-header">
-          <div style={styles.headerLeft}>
+      <div className="flex-1 flex flex-col min-w-0">
+        <header className="shrink-0 h-14 flex items-center justify-between gap-4 flex-wrap px-6 border-b border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)]">
+          <div className="flex items-center gap-4 flex-1 min-w-0">
             <button
               type="button"
-              className="admin-hamburger"
+              className="admin-hamburger shrink-0"
               onClick={() => setSidebarOpen((o) => !o)}
               aria-label="Toggle menu"
             >
@@ -212,51 +215,54 @@ export default function AdminLayout() {
               <span className="admin-hamburger-bar" />
               <span className="admin-hamburger-bar" />
             </button>
-            <div>
+            <div className="flex flex-col gap-0.5 min-w-0 flex-1 max-w-md">
               <input
                 type="search"
                 placeholder="Cari project / blog..."
-                style={styles.searchInput}
+                className="w-full max-w-[260px] py-2 px-3 text-sm bg-[var(--color-bg)] border border-[var(--color-border)] rounded-[var(--radius-md)] text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
                 aria-label="Pencarian global"
               />
-              <nav className="admin-breadcrumb" aria-label="Breadcrumb">
+              <nav className="admin-breadcrumb flex items-center gap-1 text-xs text-[var(--color-text-muted)]" aria-label="Breadcrumb">
                 {breadcrumbs.map((b, i) => (
                   <span key={i}>
-                    {i > 0 && <span className="admin-breadcrumb-sep"> / </span>}
-                    {b.to != null ? <Link to={b.to}>{b.label}</Link> : <span>{b.label}</span>}
+                    {i > 0 && <span className="opacity-60"> / </span>}
+                    {b.to != null ? <Link to={b.to} className="hover:text-[var(--color-primary)] transition-colors">{b.label}</Link> : <span className="font-medium text-[var(--color-text)]">{b.label}</span>}
                   </span>
                 ))}
               </nav>
             </div>
           </div>
-          <div style={styles.headerRight}>
+          <div className="flex items-center gap-2 shrink-0">
             <button
               type="button"
-              className="admin-theme-toggle admin-theme-toggle--header"
+              className="admin-theme-toggle admin-theme-toggle--header inline-flex items-center justify-center w-9 h-9 rounded-[var(--radius-md)]"
               onClick={handleToggleTheme}
               aria-label={theme === 'dark' ? 'Gunakan tema terang' : 'Gunakan tema gelap'}
               title={theme === 'dark' ? 'Tema terang' : 'Tema gelap'}
-              style={styles.iconBtn}
             >
               {theme === 'dark' ? '☀️' : '🌙'}
             </button>
-            <Link to="/messages" className="admin-notif-wrap" title="Pesan masuk" style={styles.iconBtn}>
+            <Link
+              to="/messages"
+              className="admin-notif-wrap inline-flex items-center justify-center w-9 h-9 rounded-[var(--radius-md)] text-[var(--color-text)] hover:bg-[var(--color-surface-elevated)] transition-colors"
+              title="Pesan masuk"
+            >
               🔔
               {unreadCount > 0 && <span className="admin-notif-badge">{unreadCount > 99 ? '99+' : unreadCount}</span>}
             </Link>
             <Menu as="div" className="relative">
-              <MenuButton className="inline-flex items-center gap-1 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-1.5 text-sm text-[var(--color-text)] hover:bg-[var(--color-border)]">
+              <MenuButton className="inline-flex items-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-elevated)] px-3 py-2 text-sm font-medium text-[var(--color-text)] hover:bg-[var(--color-border)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]">
                 {user?.full_name || 'Admin'} ▼
               </MenuButton>
               <MenuItems
                 anchor="bottom end"
-                className="mt-1 min-w-[140px] rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-1 shadow-lg outline-none"
+                className="mt-1.5 min-w-[160px] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-1 shadow-[var(--shadow-md)] outline-none"
               >
                 <MenuItem>
                   <button
                     type="button"
                     onClick={handleLogout}
-                    className="block w-full rounded px-3 py-2 text-left text-sm text-[var(--color-text)] data-[focus]:bg-[var(--color-border)]"
+                    className="block w-full rounded-[var(--radius-sm)] px-3 py-2.5 text-left text-sm text-[var(--color-text)] transition-colors hover:bg-[var(--color-surface-elevated)] data-[focus]:bg-[var(--color-surface-elevated)]"
                   >
                     Logout
                   </button>
@@ -265,146 +271,11 @@ export default function AdminLayout() {
             </Menu>
           </div>
         </header>
-        <div style={styles.content}>
+        <main className="flex-1 p-6 overflow-auto">
           <Outlet />
-        </div>
+        </main>
       </div>
     </div>
   );
 }
 
-const styles = {
-  wrapper: { display: 'flex', minHeight: '100vh' },
-  sidebar: {
-    width: 'var(--sidebar-width)',
-    background: 'var(--color-surface)',
-    borderRight: '1px solid var(--color-border)',
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '1rem 0',
-  },
-  logo: { padding: '0 1rem 1rem', fontWeight: 700, fontSize: '1rem' },
-  nav: { flex: 1, overflow: 'auto' },
-  menuGroup: { marginBottom: '0.25rem' },
-  groupLabel: {
-    padding: '0.25rem 1rem',
-    fontSize: '0.6875rem',
-    fontWeight: 600,
-    textTransform: 'uppercase',
-    letterSpacing: '0.05em',
-    color: 'var(--color-text-muted)',
-  },
-  groupButton: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
-    padding: '0.5rem 1rem',
-    fontSize: '0.8125rem',
-    fontWeight: 600,
-    textTransform: 'uppercase',
-    letterSpacing: '0.03em',
-    color: 'var(--color-text-muted)',
-    background: 'none',
-    border: 'none',
-    cursor: 'pointer',
-    font: 'inherit',
-  },
-  chevron: {
-    fontSize: '0.625rem',
-    opacity: 0.8,
-    transition: 'transform 0.2s ease',
-  },
-  dropdownItems: { paddingLeft: '0.25rem' },
-  navLink: {
-    display: 'block',
-    padding: '0.5rem 1rem',
-    fontSize: '0.875rem',
-  },
-  sidebarFooter: {
-    borderTop: '1px solid var(--color-border)',
-    paddingTop: '0.5rem',
-  },
-  logout: {
-    display: 'block',
-    width: '100%',
-    padding: '0.5rem 1rem',
-    fontSize: '0.875rem',
-    color: 'var(--color-text-muted)',
-    background: 'none',
-    border: 'none',
-    cursor: 'pointer',
-    textAlign: 'left',
-    font: 'inherit',
-  },
-  main: { flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 },
-  header: {
-    padding: '0.75rem 1.5rem',
-    borderBottom: '1px solid var(--color-border)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
-    gap: '0.75rem',
-  },
-  headerLeft: { display: 'flex', alignItems: 'center', gap: '0.75rem', flex: 1, minWidth: 0 },
-  headerRight: { display: 'flex', alignItems: 'center', gap: '1rem' },
-  searchInput: {
-    width: '100%',
-    maxWidth: 260,
-    padding: '0.4rem 0.75rem',
-    fontSize: '0.875rem',
-    background: 'var(--color-surface)',
-    border: '1px solid var(--color-border)',
-    borderRadius: 6,
-    color: 'var(--color-text)',
-  },
-  iconBtn: { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 36, height: 36, borderRadius: 8, color: 'inherit' },
-  profileBtn: {
-    padding: '0.4rem 0.75rem',
-    fontSize: '0.875rem',
-    background: 'var(--color-surface)',
-    border: '1px solid var(--color-border)',
-    borderRadius: 6,
-    color: 'var(--color-text)',
-    cursor: 'pointer',
-  },
-  dropdownBackdrop: { position: 'fixed', inset: 0, zIndex: 40 },
-  profileDropdown: {
-    position: 'absolute',
-    right: 0,
-    top: '100%',
-    marginTop: 4,
-    minWidth: 140,
-    background: 'var(--color-surface)',
-    border: '1px solid var(--color-border)',
-    borderRadius: 8,
-    boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
-    zIndex: 50,
-    padding: '0.25rem 0',
-  },
-  dropdownItem: {
-    display: 'block',
-    width: '100%',
-    padding: '0.5rem 0.75rem',
-    textAlign: 'left',
-    fontSize: '0.875rem',
-    background: 'none',
-    border: 'none',
-    cursor: 'pointer',
-    color: 'var(--color-text)',
-  },
-  collapseBtn: {
-    display: 'block',
-    width: '100%',
-    padding: '0.35rem 1rem',
-    fontSize: '0.75rem',
-    background: 'none',
-    border: 'none',
-    cursor: 'pointer',
-    textAlign: 'left',
-    color: 'var(--color-text-muted)',
-    font: 'inherit',
-  },
-  content: { padding: '1.5rem', flex: 1 },
-};
