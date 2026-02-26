@@ -20,7 +20,7 @@ flowchart LR
   D --> E
 ```
 
-Dokumen proyek ini terutama mencakup tahap **Perancangan**, **Implementasi**, dan **Deployment**. Tahap Analisis dan Pengujian tercakup sebagian (living doc / audit).
+Dokumen proyek ini sekarang mencakup tahap **Analisis Kebutuhan** (melalui `SRS-PORTFOLIO.md`), **Perancangan**, **Implementasi**, **Pengujian** (living doc / audit), dan **Deployment & Maintenance**.
 
 ---
 
@@ -35,7 +35,7 @@ Tujuan: memahami apa yang akan dibangun.
 | **User Story (Agile)** | Format: "Sebagai [user], saya ingin [fitur], agar [manfaat]." |
 | **MoSCoW Prioritization** | Pengelompokan fitur: Must have, Should have, Could have, Won't have. |
 
-**Di proyek ini:** Kebutuhan fungsional dan fitur tersebar di [PERANCANGAN_ADMIN.md](PERANCANGAN_ADMIN.md), [ARSITEKTUR.md](ARSITEKTUR.md), [PUBLIKASI_WEB.md](PUBLIKASI_WEB.md), dan README subproyek. Belum ada BRD/SRS formal terpisah; untuk proyek akademik atau compliance dapat ditambah dokumen SRS ringkas (lihat [RINGKASAN_RANCANGAN.md](RINGKASAN_RANCANGAN.md) dan fitur yang telah diimplementasi sebagai acuan).
+**Di proyek ini:** Kebutuhan fungsional dan non-fungsional terdokumentasi secara formal di [`SRS-PORTFOLIO.md`](SRS-PORTFOLIO.md) dan diperkuat oleh [PERANCANGAN_ADMIN.md](PERANCANGAN_ADMIN.md), [ARSITEKTUR.md](ARSITEKTUR.md), [PUBLIKASI_WEB.md](PUBLIKASI_WEB.md), serta README subproyek. Dokumen [RINGKASAN_RANCANGAN.md](RINGKASAN_RANCANGAN.md) berperan sebagai ringkasan rencana dan backlog fitur tingkat tinggi. BRD terpisah belum ada, namun dapat ditambahkan jika dibutuhkan untuk konteks bisnis yang lebih formal.
 
 ---
 
@@ -147,6 +147,18 @@ Kelengkapan dokumen tergantung pada metode pengembangan:
 - **Waterfall:** Dokumen harus lengkap dan detail di awal sebelum coding dimulai. Cocok untuk proyek pemerintah, perbankan, atau sistem kritis.
 - **Agile / Scrum:** Dokumen lebih ringkas dan hidup (living document). Fokus pada Product Backlog, User Stories, dan Working Software. Dokumentasi teknis sering digabung dalam Wiki (Confluence/Notion) yang diupdate per Sprint.
 
+### Mapping dokumen ke artefak Scrum (di proyek ini)
+
+| Artefak Scrum / Aktivitas | Isi | Dokumen yang merepresentasikan |
+|---------------------------|-----|--------------------------------|
+| Product Vision & Product Backlog | Tujuan produk, daftar fitur, prioritas awal | `SRS-PORTFOLIO.md`, `RINGKASAN_RANCANGAN.md` |
+| Sprint 0 (Architecture/Design Sprint) | Desain arsitektur, ERD, alur utama, perilaku API | ARSITEKTUR.md, DIAGRAM_DAN_ERD.md, PERANCANGAN_ADMIN.md, PUBLIKASI_WEB.md |
+| Sprint Backlog per fitur | Detail desain/aturan untuk fitur yang dikerjakan di sprint tertentu | ALUR_KONTEN_POST.md, bagian-bagian spesifik di PERANCANGAN_ADMIN.md dan PUBLIKASI_WEB.md |
+| Increment & Dokumentasi Implementasi | Hasil implementasi yang sudah berjalan dan cara menjalankannya | README root, README di `portfolio-api`, `portfolio-admin`, `portfolio-web` |
+| Sprint Review & Kualitas | Evaluasi kualitas, keamanan, dan bukti bahwa increment layak | AUDIT_REPORT_ISO27001.md, penjelasan testing di portfolio-api/README.md |
+| Release & Deployment | Cara merilis dan menjalankan stack di environment target | DEPLOY.md |
+| Continuous Improvement / Knowledge base | Panduan umum dokumentasi RPL, peta dokumen, dan rekomendasi perbaikan | PANDUAN_DOKUMENTASI_RPL.md, docs/README.md |
+
 ---
 
 ## Tools Rekomendasi untuk Manajemen Dokumen RPL
@@ -186,8 +198,8 @@ Dokumentasi RPL bukan sekadar formalitas, melainkan asuransi proyek. Tanpa dokum
 
 | Tahap SDLC | Tipe dokumen RPL | Dokumen di proyek |
 |------------|------------------|-------------------|
-| Analisis Kebutuhan | BRD, SRS, User Story, MoSCoW | Tersirat di PERANCANGAN_ADMIN, ARSITEKTUR, README; tidak ada BRD/SRS formal. |
-| Perancangan | SDD, ERD, diagram, API design | ARSITEKTUR.md, DIAGRAM_DAN_ERD.md, PERANCANGAN_ADMIN.md, PUBLIKASI_WEB.md, Swagger di API. |
+| Analisis Kebutuhan | BRD, SRS, User Story, MoSCoW | `SRS-PORTFOLIO.md`, `RINGKASAN_RANCANGAN.md`, serta kebutuhan yang diperjelas di PERANCANGAN_ADMIN, ARSITEKTUR, dan README subproyek. |
+| Perancangan | SDD, ERD, diagram, API design | ARSITEKTUR.md, DIAGRAM_DAN_ERD.md, PERANCANGAN_ADMIN.md, PUBLIKASI_WEB.md, ALUR_KONTEN_POST.md, Swagger di API. |
 | Implementasi | README, struktur, Changelog | README (root + api/admin/web), struktur di README root. |
 | Pengujian | Test Plan, Test Case, Audit | AUDIT_REPORT_ISO27001.md, testing di portfolio-api/README. |
 | Deployment & Maintenance | Deployment Guide, User Manual | DEPLOY.md. |

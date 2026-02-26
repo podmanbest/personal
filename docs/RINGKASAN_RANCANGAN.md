@@ -8,7 +8,7 @@ Dokumen ini merangkum rancangan (plan) yang telah dibuat untuk proyek portfolio,
 
 | Rancangan | Ringkasan | Status / dokumen |
 |-----------|-----------|-------------------|
-| **Dokumentasi menyeluruh** | Indeks dokumentasi di `docs/`, arsitektur stack, perilaku publikasi (publik vs admin), pembaruan README root. | Implementasi: [README.md](README.md) (indeks), [ARSITEKTUR.md](ARSITEKTUR.md), [PUBLIKASI_WEB.md](PUBLIKASI_WEB.md). |
+| **Dokumentasi menyeluruh** | Indeks dokumentasi di `docs/`, arsitektur stack, perilaku publikasi (publik vs admin), pembaruan README root. | Implementasi: [SRS-PORTFOLIO.md](SRS-PORTFOLIO.md), [README.md](README.md) (indeks), [ARSITEKTUR.md](ARSITEKTUR.md), [PUBLIKASI_WEB.md](PUBLIKASI_WEB.md). |
 | **Perancangan admin** | Login & current user, auto-fill user_id, form/list relasi dengan nama (bukan ID), menu sidebar dropdown per kelompok (terbuka saat halaman aktif). | Implementasi didokumentasikan di [PERANCANGAN_ADMIN.md](PERANCANGAN_ADMIN.md). |
 | **Publikasi ke web** | Request tanpa token hanya mendapat blog posts dan projects dengan `is_published = true`; admin dengan token melihat semua (termasuk draft). Dukungan is_published untuk Projects di API dan admin. | Implementasi di API (BlogPostController, ProjectController) dan admin (resourceConfig projects); perilaku di [PUBLIKASI_WEB.md](PUBLIKASI_WEB.md). |
 | **Perbaikan review admin** | (1) Dashboard: link Edit post terbaru membuka modal edit via `?edit=id`. (2) Contact messages: tampil body pesan (nama, email, subjek, pesan) read-only di form. (3) Filter: select dari API (users, skills, blog-posts, dll.). (4) Users: field username dan password di form dengan dukungan API. | Implementasi tersebar di ResourcePage, resourceConfig, Dashboard, UserController. |
@@ -30,10 +30,12 @@ Rancangan tambahan yang pernah dibuat (mis. di Cursor Plans) dan dapat dipakai s
 
 ## Alur dari rancangan ke dokumentasi
 
-1. **Rancangan** — Disusun (mis. di Cursor Plans atau dokumen sementara).
-2. **Implementasi** — Perubahan kode di portfolio-api, portfolio-admin, portfolio-web.
-3. **Dokumentasi** — Hasil dan keputusan dicatat di `docs/` (PERANCANGAN_ADMIN, ARSITEKTUR, PUBLIKASI_WEB, AUDIT_REPORT_ISO27001) dan README subproyek.
-4. **Indeks** — [docs/README.md](README.md) dan [README.md](../README.md) menghubungkan semua dokumen.
+1. **Kebutuhan & visi** — Diformalkan di [SRS-PORTFOLIO.md](SRS-PORTFOLIO.md) dan diringkas sebagai backlog fitur di dokumen ini.
+2. **Rancangan / desain detail** — Dipecah menjadi arsitektur, ERD, alur, dan perancangan fitur: [ARSITEKTUR.md](ARSITEKTUR.md), [DIAGRAM_DAN_ERD.md](DIAGRAM_DAN_ERD.md), [PERANCANGAN_ADMIN.md](PERANCANGAN_ADMIN.md), [PUBLIKASI_WEB.md](PUBLIKASI_WEB.md), [ALUR_KONTEN_POST.md](ALUR_KONTEN_POST.md).
+3. **Implementasi** — Perubahan kode di portfolio-api, portfolio-admin, portfolio-web sesuai rancangan.
+4. **Pengujian & audit** — Hasil pengujian dan audit dicatat, misalnya di [AUDIT_REPORT_ISO27001.md](AUDIT_REPORT_ISO27001.md) dan panduan testing di `portfolio-api/README.md`.
+5. **Deployment** — Cara menjalankan dan merilis stack didokumentasikan di [DEPLOY.md](../DEPLOY.md) dan konfigurasi terkait (misalnya `compose.yaml`).
+6. **Indeks & panduan RPL** — [docs/README.md](README.md) dan [PANDUAN_DOKUMENTASI_RPL.md](PANDUAN_DOKUMENTASI_RPL.md) menghubungkan semua dokumen dan memetakan ke tahap SDLC/Scrum.
 
 **Diagram dan ERD:** Diagram arsitektur stack, Entity Relationship Diagram (ERD) database, alur publikasi, alur admin, dan alur deploy tersedia di [DIAGRAM_DAN_ERD.md](DIAGRAM_DAN_ERD.md) (format Mermaid).
 

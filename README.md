@@ -50,13 +50,15 @@ Lihat [DEPLOY.md](DEPLOY.md) untuk build dan jalankan seluruh stack dengan Podma
 
 Dokumentasi menyeluruh ada di folder **docs/**; indeks lengkap: [docs/README.md](docs/README.md).
 
+- [docs/SRS-PORTFOLIO.md](docs/SRS-PORTFOLIO.md) — Spesifikasi kebutuhan perangkat lunak (FR, NFR, batasan) untuk aplikasi web portfolio.
+- [docs/RINGKASAN_RANCANGAN.md](docs/RINGKASAN_RANCANGAN.md) — Ringkasan rancangan proyek dan backlog fitur utama.
 - [docs/ARSITEKTUR.md](docs/ARSITEKTUR.md) — Gambaran stack, alur akses, dan pembagian publik vs admin.
+- [docs/DIAGRAM_DAN_ERD.md](docs/DIAGRAM_DAN_ERD.md) — Diagram arsitektur, ERD database, dan alur (Mermaid).
 - [docs/PERANCANGAN_ADMIN.md](docs/PERANCANGAN_ADMIN.md) — Fitur admin: login, current user, relasi nama, menu dropdown.
 - [docs/PUBLIKASI_WEB.md](docs/PUBLIKASI_WEB.md) — Perilaku API untuk publik vs admin (blog-posts, projects).
+- [docs/ALUR_KONTEN_POST.md](docs/ALUR_KONTEN_POST.md) — Alur end-to-end konten blog post dari admin sampai tampil di web publik.
 - [docs/AUDIT_REPORT_ISO27001.md](docs/AUDIT_REPORT_ISO27001.md) — Laporan audit keamanan (API & admin).
-- [docs/RINGKASAN_RANCANGAN.md](docs/RINGKASAN_RANCANGAN.md) — Ringkasan rancangan proyek dan tautan ke dokumen terkait.
-- [docs/DIAGRAM_DAN_ERD.md](docs/DIAGRAM_DAN_ERD.md) — Diagram arsitektur, ERD database, dan alur (Mermaid).
-- [docs/PANDUAN_DOKUMENTASI_RPL.md](docs/PANDUAN_DOKUMENTASI_RPL.md) — Panduan struktur dokumen RPL/SDLC dan peta dokumen proyek ke tahap SDLC.
+- [docs/PANDUAN_DOKUMENTASI_RPL.md](docs/PANDUAN_DOKUMENTASI_RPL.md) — Panduan struktur dokumen RPL/SDLC, mapping ke artefak Scrum, dan peta dokumen proyek.
 - [DEPLOY.md](DEPLOY.md) — Deploy stack dengan Podman/Docker Compose.
 
 ## Subproyek
