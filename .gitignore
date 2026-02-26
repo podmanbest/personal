@@ -1,0 +1,10 @@
+# Cursor
+.cursor/
+.cursorrules
+.cursorignore
+.cursorignorerules
+.cursorignorerules
+
+# Database data
+data/
+

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useLayoutEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { getTheme } from '../theme'
+import mermaid from 'mermaid'
 
 export default function MarkdownContent({ content = '', className, style }) {
   const [theme, setThemeState] = useState(() => (typeof document !== 'undefined' ? (document.documentElement.getAttribute('data-theme') || 'dark') : 'dark'))
@@ -20,6 +21,9 @@ export default function MarkdownContent({ content = '', className, style }) {
           code({ node, inline, className: codeClassName, children, ...props }) {
             const match = /language-(\w+)/.exec(codeClassName || '')
             const codeString = String(children).replace(/\n$/, '')
+            if (!inline && match && match[1] === 'mermaid') {
+              return <MermaidDiagram code={codeString} theme={theme} />
+            }
             if (!inline && match) {
               return (
                 <SyntaxHighlighter
@@ -60,4 +64,36 @@ const inlineCodeStyle = {
   padding: '0.15em 0.4em',
   borderRadius: 4,
   fontSize: '0.9em',
+}
+
+function MermaidDiagram({ code, theme }) {
+  const [svg, setSvg] = useState('')
+
+  useLayoutEffect(() => {
+    let cancelled = false
+    async function render() {
+      try {
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: theme === 'light' ? 'default' : 'dark',
+        })
+        const { svg: svgCode } = await mermaid.render(`mermaid-${Math.random().toString(36).slice(2, 9)}`, code)
+        if (!cancelled) setSvg(svgCode)
+      } catch {
+        if (!cancelled) setSvg(`<pre>${code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>`)
+      }
+    }
+    render()
+    return () => {
+      cancelled = true
+    }
+  }, [code, theme])
+
+  return (
+    <div
+      className="mermaid-diagram"
+      style={{ margin: '1.5rem 0', overflowX: 'auto' }}
+      dangerouslySetInnerHTML={{ __html: svg }}
+    />
+  )
 }
