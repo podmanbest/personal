@@ -30,6 +30,12 @@ Laporan audit keamanan informasi (API & admin) mengacu kontrol Annex A ISO/IEC 2
 
 ---
 
+### [RINGKASAN_RANCANGAN.md](RINGKASAN_RANCANGAN.md)
+
+Ringkasan rancangan (plan) yang telah dibuat untuk proyek: dokumentasi menyeluruh, perancangan admin, publikasi web, perbaikan review admin, admin bergaya CMS, serta rancangan lain (UI/UX, API, auth, deploy). Menghubungkan setiap rancangan dengan status implementasi dan dokumen terkait. Berguna untuk **tech lead** dan **developer** yang ingin konteks rencana pengembangan.
+
+---
+
 ## Dokumen di luar folder docs/
 
 | Dokumen | Lokasi | Isi | Untuk siapa |
@@ -48,4 +54,5 @@ Laporan audit keamanan informasi (API & admin) mengacu kontrol Annex A ISO/IEC 2
 - Ingin **detail fitur admin** → baca [PERANCANGAN_ADMIN.md](PERANCANGAN_ADMIN.md).
 - Ingin **publik vs admin API** → baca [PUBLIKASI_WEB.md](PUBLIKASI_WEB.md).
 - Ingin **audit keamanan** → baca [AUDIT_REPORT_ISO27001.md](AUDIT_REPORT_ISO27001.md).
+- Ingin **ringkasan rancangan/plan** → baca [RINGKASAN_RANCANGAN.md](RINGKASAN_RANCANGAN.md).
 - Ingin **jalankan / deploy** → [README.md](../README.md) dan [DEPLOY.md](../DEPLOY.md); setup per app di README masing-masing subproyek.
