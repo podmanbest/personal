@@ -36,6 +36,12 @@ Ringkasan rancangan (plan) yang telah dibuat untuk proyek: dokumentasi menyeluru
 
 ---
 
+### [DIAGRAM_DAN_ERD.md](DIAGRAM_DAN_ERD.md)
+
+Diagram dan ERD: (1) arsitektur stack (klien–API–DB), (2) Entity Relationship Diagram database (users, experiences, educations, projects, blog_posts, skills, tags, pivot tables, dll.), (3) alur publikasi (publik vs admin), (4) alur admin login dan auto-fill, (5) alur deploy container. Semua dalam format Mermaid. Berguna untuk **developer** dan **tech lead** yang perlu gambaran visual model data dan alur sistem.
+
+---
+
 ## Dokumen di luar folder docs/
 
 | Dokumen | Lokasi | Isi | Untuk siapa |
@@ -55,4 +61,5 @@ Ringkasan rancangan (plan) yang telah dibuat untuk proyek: dokumentasi menyeluru
 - Ingin **publik vs admin API** → baca [PUBLIKASI_WEB.md](PUBLIKASI_WEB.md).
 - Ingin **audit keamanan** → baca [AUDIT_REPORT_ISO27001.md](AUDIT_REPORT_ISO27001.md).
 - Ingin **ringkasan rancangan/plan** → baca [RINGKASAN_RANCANGAN.md](RINGKASAN_RANCANGAN.md).
+- Ingin **diagram dan ERD** → baca [DIAGRAM_DAN_ERD.md](DIAGRAM_DAN_ERD.md).
 - Ingin **jalankan / deploy** → [README.md](../README.md) dan [DEPLOY.md](../DEPLOY.md); setup per app di README masing-masing subproyek.

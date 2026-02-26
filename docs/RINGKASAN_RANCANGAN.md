@@ -35,4 +35,6 @@ Rancangan tambahan yang pernah dibuat (mis. di Cursor Plans) dan dapat dipakai s
 3. **Dokumentasi** — Hasil dan keputusan dicatat di `docs/` (PERANCANGAN_ADMIN, ARSITEKTUR, PUBLIKASI_WEB, AUDIT_REPORT_ISO27001) dan README subproyek.
 4. **Indeks** — [docs/README.md](README.md) dan [README.md](../README.md) menghubungkan semua dokumen.
 
+**Diagram dan ERD:** Diagram arsitektur stack, Entity Relationship Diagram (ERD) database, alur publikasi, alur admin, dan alur deploy tersedia di [DIAGRAM_DAN_ERD.md](DIAGRAM_DAN_ERD.md) (format Mermaid).
+
 Untuk daftar lengkap dokumen proyek, lihat [Indeks Dokumentasi](README.md).
