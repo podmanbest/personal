@@ -81,10 +81,10 @@ Pilih salah satu cara:
 
 ### Opsi A: Laragon (Apache/Nginx)
 
-- Pastikan proyek berada di bawah folder `www` (mis. `c:\laragon\www\api-portfolio`).
+- Pastikan proyek berada di bawah folder `www` (mis. `c:\laragon\www\portfolio-api`).
 - Nyalakan Laragon dan pastikan MySQL/MariaDB berjalan.
 - Buka di browser:
-    - **Base URL**: `http://localhost/api-portfolio/public`
+    - **Base URL**: `http://localhost/portfolio-api/public`
     - Ganti `localhost` dengan virtual host Anda jika sudah dikonfigurasi.
 
 ### Opsi B: Built-in PHP server (development)
@@ -107,7 +107,7 @@ OpenAPI 3 dan Swagger UI disediakan untuk menjelajah dan mencoba endpoint.
 
 - **Swagger UI** (explore & try API):  
   **GET** `/docs`  
-  Contoh: [http://localhost:8000/docs](http://localhost:8000/docs) (jika pakai `php artisan serve`), atau `http://localhost/api-portfolio/public/docs` (jika pakai Laragon).
+  Contoh: [http://localhost:8000/docs](http://localhost:8000/docs) (jika pakai `php artisan serve`), atau `http://localhost/portfolio-api/public/docs` (jika pakai Laragon).
 
 - **Spesifikasi OpenAPI 3 (YAML)**:  
   **GET** `/docs/openapi.yaml`  

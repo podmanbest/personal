@@ -1,6 +1,6 @@
 # Deploy Portfolio Stack dengan Podman
 
-Stack: Lumen API (`api-portfolio`), MariaDB, frontend visitor (`portfolio-web`), frontend admin (`portfolio-admin`). Semua dijalankan sebagai container; orkestrasi via Podman (atau Docker) Compose.
+Stack: Lumen API (`portfolio-api`), MariaDB, frontend visitor (`portfolio-web`), frontend admin (`portfolio-admin`). Semua dijalankan sebagai container; orkestrasi via Podman (atau Docker) Compose.
 
 ## Prasyarat
 
@@ -10,7 +10,7 @@ Stack: Lumen API (`api-portfolio`), MariaDB, frontend visitor (`portfolio-web`),
 ## 1. Siapkan env
 
 ```bash
-cd api-portfolio
+cd portfolio-api
 cp .env.example.podman .env.podman
 # Edit .env.podman: isi APP_KEY (generate dengan: php -r "echo 'base64:'.base64_encode(random_bytes(32));"), sesuaikan DB_* / MYSQL_ROOT_PASSWORD bila perlu.
 ```
@@ -19,7 +19,7 @@ Jangan commit `.env.podman` (berisi rahasia).
 
 ## 2. Build dan jalankan dengan Compose
 
-Dari **root workspace** (folder yang berisi `api-portfolio`, `portfolio-web`, `portfolio-admin`, `compose.yaml`):
+Dari **root workspace** (folder yang berisi `portfolio-api`, `portfolio-web`, `portfolio-admin`, `compose.yaml`):
 
 ```bash
 podman-compose up -d --build
@@ -27,7 +27,7 @@ podman-compose up -d --build
 docker compose up -d --build
 ```
 
-- **db**: MariaDB di port 3306 (volume `portfolio-db-data` untuk data persisten)
+- **db**: MariaDB di port 3306 (data persisten di bind mount `./data`)
 - **api**: Lumen di http://localhost:8000 (Swagger UI: http://localhost:8000/docs)
 - **web**: Visitor di http://localhost:3000 (proxy `/api` ke backend)
 - **admin**: Admin di http://localhost:3001 (proxy `/api` ke backend)
@@ -60,7 +60,7 @@ podman run -d --name portfolio-db --pod portfolio-pod \
   mariadb:10.11
 
 # Tunggu DB siap (mis. 10 detik), lalu build dan jalankan API
-cd api-portfolio
+cd portfolio-api
 podman build -t portfolio-api -f Containerfile .
 podman run -d --name portfolio-api --pod portfolio-pod \
   -e DB_HOST=portfolio-db \

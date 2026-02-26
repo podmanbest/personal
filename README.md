@@ -54,10 +54,15 @@ Dokumentasi menyeluruh ada di folder **docs/**; indeks lengkap: [docs/README.md]
 - [docs/RINGKASAN_RANCANGAN.md](docs/RINGKASAN_RANCANGAN.md) — Ringkasan rancangan proyek dan backlog fitur utama.
 - [docs/ARSITEKTUR.md](docs/ARSITEKTUR.md) — Gambaran stack, alur akses, dan pembagian publik vs admin.
 - [docs/DIAGRAM_DAN_ERD.md](docs/DIAGRAM_DAN_ERD.md) — Diagram arsitektur, ERD database, dan alur (Mermaid).
+- [docs/RANCANGAN_WEB_UI_UX.md](docs/RANCANGAN_WEB_UI_UX.md) — Rancangan UI/UX situs publik (Clean & Content-First).
+- [docs/RANCANGAN_ADMIN_UI_UX.md](docs/RANCANGAN_ADMIN_UI_UX.md) — Rancangan UI/UX panel admin (Clean Data-Driven Dashboard).
 - [docs/PERANCANGAN_ADMIN.md](docs/PERANCANGAN_ADMIN.md) — Fitur admin: login, current user, relasi nama, menu dropdown.
 - [docs/PUBLIKASI_WEB.md](docs/PUBLIKASI_WEB.md) — Perilaku API untuk publik vs admin (blog-posts, projects).
 - [docs/ALUR_KONTEN_POST.md](docs/ALUR_KONTEN_POST.md) — Alur end-to-end konten blog post dari admin sampai tampil di web publik.
-- [docs/AUDIT_REPORT_ISO27001.md](docs/AUDIT_REPORT_ISO27001.md) — Laporan audit keamanan (API & admin).
+- [docs/AUDIT_REPORT_ISO27001.md](docs/AUDIT_REPORT_ISO27001.md) — Laporan audit keamanan (API & admin, ISO 27001:2022).
+- [docs/AUDIT_PROJECT.md](docs/AUDIT_PROJECT.md) — Audit proyek (struktur, dokumentasi, dependensi, tooling).
+- [docs/AUDIT_MENYELURUH.md](docs/AUDIT_MENYELURUH.md) — Audit menyeluruh (konsolidasi semua audit).
+- [docs/AUDIT_API.md](docs/AUDIT_API.md) — Audit API (portfolio-api): routing, auth, validasi, testing.
 - [docs/PANDUAN_DOKUMENTASI_RPL.md](docs/PANDUAN_DOKUMENTASI_RPL.md) — Panduan struktur dokumen RPL/SDLC, mapping ke artefak Scrum, dan peta dokumen proyek.
 - [DEPLOY.md](DEPLOY.md) — Deploy stack dengan Podman/Docker Compose.
 

@@ -1,6 +1,6 @@
 # Portfolio Admin
 
-Dashboard admin untuk mengelola data portfolio (CRUD). Mengonsumsi API Lumen (`api-portfolio`).
+Dashboard admin untuk mengelola data portfolio (CRUD). Mengonsumsi API Lumen (`portfolio-api`).
 
 ## Setup
 
