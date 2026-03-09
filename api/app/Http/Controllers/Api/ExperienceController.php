@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Experience;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -86,3 +87,4 @@ class ExperienceController extends Controller
         return $this->successResponse(null, 'Experience deleted successfully');
     }
 }
+

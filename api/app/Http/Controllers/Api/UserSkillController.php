@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\UserSkill;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -83,3 +84,4 @@ class UserSkillController extends Controller
         return $this->successResponse(null, 'User skill deleted successfully');
     }
 }
+

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -107,3 +108,4 @@ class ProjectController extends Controller
         return $this->successResponse(null, 'Project deleted successfully');
     }
 }
+

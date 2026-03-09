@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\PostTag;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -77,3 +78,4 @@ class PostTagController extends Controller
         return $this->successResponse(null, 'Post tag deleted successfully');
     }
 }
+

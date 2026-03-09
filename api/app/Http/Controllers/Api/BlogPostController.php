@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\BlogPost;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -97,3 +98,4 @@ class BlogPostController extends Controller
         return $this->successResponse(null, 'Blog post deleted successfully');
     }
 }
+

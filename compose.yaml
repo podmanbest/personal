@@ -64,7 +64,7 @@ services:
 
   web:
     build:
-      context: ./portfolio-web
+      context: ./web
       dockerfile: Containerfile
       args:
         VITE_API_URL: ${VITE_API_URL:-}
@@ -76,7 +76,7 @@ services:
 
   admin:
     build:
-      context: ./portfolio-admin
+      context: ./dashboard
       dockerfile: Containerfile
       args:
         VITE_API_URL: ${VITE_API_URL:-}

@@ -51,64 +51,64 @@ $router->get('docs/', function () {
 
 $router->group(['prefix' => 'api', 'middleware' => 'throttle:60'], function () use ($router) {
     // Users (public read)
-    $router->get('users', 'UserController@index');
-    $router->get('users/{id}', 'UserController@show');
+    $router->get('users', 'Api\UserController@index');
+    $router->get('users/{id}', 'Api\UserController@show');
 
     // Experiences
-    $router->get('experiences', 'ExperienceController@index');
-    $router->get('experiences/{id}', 'ExperienceController@show');
+    $router->get('experiences', 'Api\ExperienceController@index');
+    $router->get('experiences/{id}', 'Api\ExperienceController@show');
 
     // Educations
-    $router->get('educations', 'EducationController@index');
-    $router->get('educations/{id}', 'EducationController@show');
+    $router->get('educations', 'Api\EducationController@index');
+    $router->get('educations/{id}', 'Api\EducationController@show');
 
     // Skill categories
-    $router->get('skill-categories', 'SkillCategoryController@index');
-    $router->get('skill-categories/{id}', 'SkillCategoryController@show');
+    $router->get('skill-categories', 'Api\SkillCategoryController@index');
+    $router->get('skill-categories/{id}', 'Api\SkillCategoryController@show');
 
     // Skills
-    $router->get('skills', 'SkillController@index');
-    $router->get('skills/{id}', 'SkillController@show');
+    $router->get('skills', 'Api\SkillController@index');
+    $router->get('skills/{id}', 'Api\SkillController@show');
 
     // User skills (pivot)
-    $router->get('user-skills', 'UserSkillController@index');
-    $router->get('user-skills/{id}', 'UserSkillController@show');
+    $router->get('user-skills', 'Api\UserSkillController@index');
+    $router->get('user-skills/{id}', 'Api\UserSkillController@show');
 
     // Projects
-    $router->get('projects', 'ProjectController@index');
-    $router->get('projects/{id}', 'ProjectController@show');
+    $router->get('projects', 'Api\ProjectController@index');
+    $router->get('projects/{id}', 'Api\ProjectController@show');
 
     // Project skills (pivot)
-    $router->get('project-skills', 'ProjectSkillController@index');
-    $router->get('project-skills/{id}', 'ProjectSkillController@show');
+    $router->get('project-skills', 'Api\ProjectSkillController@index');
+    $router->get('project-skills/{id}', 'Api\ProjectSkillController@show');
 
     // Blog posts
-    $router->get('blog-posts', 'BlogPostController@index');
-    $router->get('blog-posts/{id}', 'BlogPostController@show');
+    $router->get('blog-posts', 'Api\BlogPostController@index');
+    $router->get('blog-posts/{id}', 'Api\BlogPostController@show');
 
     // Tags
-    $router->get('tags', 'TagController@index');
-    $router->get('tags/{id}', 'TagController@show');
+    $router->get('tags', 'Api\TagController@index');
+    $router->get('tags/{id}', 'Api\TagController@show');
 
     // Post tags (pivot)
-    $router->get('post-tags', 'PostTagController@index');
-    $router->get('post-tags/{id}', 'PostTagController@show');
+    $router->get('post-tags', 'Api\PostTagController@index');
+    $router->get('post-tags/{id}', 'Api\PostTagController@show');
 
     // Certifications
-    $router->get('certifications', 'CertificationController@index');
-    $router->get('certifications/{id}', 'CertificationController@show');
+    $router->get('certifications', 'Api\CertificationController@index');
+    $router->get('certifications/{id}', 'Api\CertificationController@show');
 
     // Public contact form (no auth) - stricter limit applied below
 });
 
 // POST /api/contact with stricter rate limit (5/min)
 $router->group(['prefix' => 'api', 'middleware' => 'throttle:5'], function () use ($router) {
-    $router->post('contact', 'PublicContactController@store');
+    $router->post('contact', 'Api\PublicContactController@store');
 });
 
 // POST /api/login (username + password, rate limit 10/min per IP)
 $router->group(['prefix' => 'api', 'middleware' => 'throttle:10,1'], function () use ($router) {
-    $router->post('login', 'LoginController@login');
+    $router->post('login', 'Api\LoginController@login');
 });
 
 /*
@@ -119,82 +119,82 @@ $router->group(['prefix' => 'api', 'middleware' => 'throttle:10,1'], function ()
 
 $router->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($router) {
     // Users (mutate)
-    $router->post('users', 'UserController@store');
-    $router->put('users/{id}', 'UserController@update');
-    $router->patch('users/{id}', 'UserController@update');
-    $router->delete('users/{id}', 'UserController@destroy');
+    $router->post('users', 'Api\UserController@store');
+    $router->put('users/{id}', 'Api\UserController@update');
+    $router->patch('users/{id}', 'Api\UserController@update');
+    $router->delete('users/{id}', 'Api\UserController@destroy');
 
     // Experiences
-    $router->post('experiences', 'ExperienceController@store');
-    $router->put('experiences/{id}', 'ExperienceController@update');
-    $router->patch('experiences/{id}', 'ExperienceController@update');
-    $router->delete('experiences/{id}', 'ExperienceController@destroy');
+    $router->post('experiences', 'Api\ExperienceController@store');
+    $router->put('experiences/{id}', 'Api\ExperienceController@update');
+    $router->patch('experiences/{id}', 'Api\ExperienceController@update');
+    $router->delete('experiences/{id}', 'Api\ExperienceController@destroy');
 
     // Educations
-    $router->post('educations', 'EducationController@store');
-    $router->put('educations/{id}', 'EducationController@update');
-    $router->patch('educations/{id}', 'EducationController@update');
-    $router->delete('educations/{id}', 'EducationController@destroy');
+    $router->post('educations', 'Api\EducationController@store');
+    $router->put('educations/{id}', 'Api\EducationController@update');
+    $router->patch('educations/{id}', 'Api\EducationController@update');
+    $router->delete('educations/{id}', 'Api\EducationController@destroy');
 
     // Skill categories
-    $router->post('skill-categories', 'SkillCategoryController@store');
-    $router->put('skill-categories/{id}', 'SkillCategoryController@update');
-    $router->patch('skill-categories/{id}', 'SkillCategoryController@update');
-    $router->delete('skill-categories/{id}', 'SkillCategoryController@destroy');
+    $router->post('skill-categories', 'Api\SkillCategoryController@store');
+    $router->put('skill-categories/{id}', 'Api\SkillCategoryController@update');
+    $router->patch('skill-categories/{id}', 'Api\SkillCategoryController@update');
+    $router->delete('skill-categories/{id}', 'Api\SkillCategoryController@destroy');
 
     // Skills
-    $router->post('skills', 'SkillController@store');
-    $router->put('skills/{id}', 'SkillController@update');
-    $router->patch('skills/{id}', 'SkillController@update');
-    $router->delete('skills/{id}', 'SkillController@destroy');
+    $router->post('skills', 'Api\SkillController@store');
+    $router->put('skills/{id}', 'Api\SkillController@update');
+    $router->patch('skills/{id}', 'Api\SkillController@update');
+    $router->delete('skills/{id}', 'Api\SkillController@destroy');
 
     // User skills (pivot)
-    $router->post('user-skills', 'UserSkillController@store');
-    $router->put('user-skills/{id}', 'UserSkillController@update');
-    $router->patch('user-skills/{id}', 'UserSkillController@update');
-    $router->delete('user-skills/{id}', 'UserSkillController@destroy');
+    $router->post('user-skills', 'Api\UserSkillController@store');
+    $router->put('user-skills/{id}', 'Api\UserSkillController@update');
+    $router->patch('user-skills/{id}', 'Api\UserSkillController@update');
+    $router->delete('user-skills/{id}', 'Api\UserSkillController@destroy');
 
     // Projects
-    $router->post('projects', 'ProjectController@store');
-    $router->put('projects/{id}', 'ProjectController@update');
-    $router->patch('projects/{id}', 'ProjectController@update');
-    $router->delete('projects/{id}', 'ProjectController@destroy');
+    $router->post('projects', 'Api\ProjectController@store');
+    $router->put('projects/{id}', 'Api\ProjectController@update');
+    $router->patch('projects/{id}', 'Api\ProjectController@update');
+    $router->delete('projects/{id}', 'Api\ProjectController@destroy');
 
     // Project skills (pivot)
-    $router->post('project-skills', 'ProjectSkillController@store');
-    $router->put('project-skills/{id}', 'ProjectSkillController@update');
-    $router->patch('project-skills/{id}', 'ProjectSkillController@update');
-    $router->delete('project-skills/{id}', 'ProjectSkillController@destroy');
+    $router->post('project-skills', 'Api\ProjectSkillController@store');
+    $router->put('project-skills/{id}', 'Api\ProjectSkillController@update');
+    $router->patch('project-skills/{id}', 'Api\ProjectSkillController@update');
+    $router->delete('project-skills/{id}', 'Api\ProjectSkillController@destroy');
 
     // Blog posts
-    $router->post('blog-posts', 'BlogPostController@store');
-    $router->put('blog-posts/{id}', 'BlogPostController@update');
-    $router->patch('blog-posts/{id}', 'BlogPostController@update');
-    $router->delete('blog-posts/{id}', 'BlogPostController@destroy');
+    $router->post('blog-posts', 'Api\BlogPostController@store');
+    $router->put('blog-posts/{id}', 'Api\BlogPostController@update');
+    $router->patch('blog-posts/{id}', 'Api\BlogPostController@update');
+    $router->delete('blog-posts/{id}', 'Api\BlogPostController@destroy');
 
     // Tags
-    $router->post('tags', 'TagController@store');
-    $router->put('tags/{id}', 'TagController@update');
-    $router->patch('tags/{id}', 'TagController@update');
-    $router->delete('tags/{id}', 'TagController@destroy');
+    $router->post('tags', 'Api\TagController@store');
+    $router->put('tags/{id}', 'Api\TagController@update');
+    $router->patch('tags/{id}', 'Api\TagController@update');
+    $router->delete('tags/{id}', 'Api\TagController@destroy');
 
     // Post tags (pivot)
-    $router->post('post-tags', 'PostTagController@store');
-    $router->put('post-tags/{id}', 'PostTagController@update');
-    $router->patch('post-tags/{id}', 'PostTagController@update');
-    $router->delete('post-tags/{id}', 'PostTagController@destroy');
+    $router->post('post-tags', 'Api\PostTagController@store');
+    $router->put('post-tags/{id}', 'Api\PostTagController@update');
+    $router->patch('post-tags/{id}', 'Api\PostTagController@update');
+    $router->delete('post-tags/{id}', 'Api\PostTagController@destroy');
 
     // Certifications
-    $router->post('certifications', 'CertificationController@store');
-    $router->put('certifications/{id}', 'CertificationController@update');
-    $router->patch('certifications/{id}', 'CertificationController@update');
-    $router->delete('certifications/{id}', 'CertificationController@destroy');
+    $router->post('certifications', 'Api\CertificationController@store');
+    $router->put('certifications/{id}', 'Api\CertificationController@update');
+    $router->patch('certifications/{id}', 'Api\CertificationController@update');
+    $router->delete('certifications/{id}', 'Api\CertificationController@destroy');
 
     // Contact messages (admin only: list, show, create, update, delete)
-    $router->get('contact-messages', 'ContactMessageController@index');
-    $router->get('contact-messages/{id}', 'ContactMessageController@show');
-    $router->post('contact-messages', 'ContactMessageController@store');
-    $router->put('contact-messages/{id}', 'ContactMessageController@update');
-    $router->patch('contact-messages/{id}', 'ContactMessageController@update');
-    $router->delete('contact-messages/{id}', 'ContactMessageController@destroy');
+    $router->get('contact-messages', 'Api\ContactMessageController@index');
+    $router->get('contact-messages/{id}', 'Api\ContactMessageController@show');
+    $router->post('contact-messages', 'Api\ContactMessageController@store');
+    $router->put('contact-messages/{id}', 'Api\ContactMessageController@update');
+    $router->patch('contact-messages/{id}', 'Api\ContactMessageController@update');
+    $router->delete('contact-messages/{id}', 'Api\ContactMessageController@destroy');
 });
